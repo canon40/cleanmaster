@@ -164,3 +164,6 @@ a.card{display:block}
 .post-imgs figure{margin:0 0 16px}
 .post-imgs img{display:block;max-width:100%;height:auto;border-radius:var(--radius);border:1px solid var(--line)}
 @media (max-width:900px){.works{grid-template-columns:1fr 1fr;gap:12px}.work-body{padding:12px 12px 14px}.work h3{font-size:14.5px}}
+
+/* 상담전화 두 개 표시 */
+.tel a{display:block;font-size:16.5px;line-height:1.3}

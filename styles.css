@@ -202,3 +202,11 @@ html{scroll-padding-top:136px}
 .head-photos img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .2s}
 .head-photos a:hover img{transform:scale(1.04)}
 @media (max-width:900px){.page-head.split .wrap{grid-template-columns:1fr;gap:24px}.page-head.split .head-photos{order:-1}}
+
+/* 로고 */
+.header-row{height:84px}
+.brand{gap:14px;font-size:27px}
+.brand-logo{width:60px;height:60px;border-radius:50%;display:block;flex:none;box-shadow:0 0 0 1px var(--line)}
+.brand small{font-size:11.5px;letter-spacing:.06em;margin-bottom:2px}
+html{scroll-padding-top:148px}
+@media (max-width:900px){.header-row{height:72px}.brand{font-size:22px;gap:10px}.brand-logo{width:50px;height:50px}.brand small{font-size:10px}.nav{top:72px}}

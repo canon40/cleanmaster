@@ -251,3 +251,16 @@ body.reading{overflow:hidden}
 .reader-frame iframe{flex:1;min-height:0;height:auto}
 .reader-note{margin:0;padding:7px 14px;font-size:13px;color:#555;background:#f3f1ec;border-bottom:1px solid #ddd}
 .reader-note a{color:#7a5a17;font-weight:700;text-decoration:underline}
+
+/* 분야 11개 */
+.svc-sub{color:var(--accent);font-weight:600;font-size:17px;margin:8px 0 2px}
+.catbar a{padding:13px 6px;font-size:14px}
+@media (max-width:1180px){.catbar .wrap{justify-content:flex-start}.catbar a{padding:13px 10px}}
+@media (min-width:901px){
+  .catbar .wrap{flex-wrap:wrap;justify-content:flex-start;gap:0 6px;padding-top:4px;padding-bottom:4px}
+  .catbar a{padding:8px 9px;font-size:14.5px}
+  html{scroll-padding-top:190px}
+}
+body.reading{display:flex;flex-direction:column;height:100dvh}
+body.reading .site-header{flex:none}
+body.reading .reader{flex:1;min-height:0;height:auto;width:100%}

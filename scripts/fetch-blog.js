@@ -33,20 +33,26 @@ async function cover(logNo) {
     const r = await fetch('https://m.blog.naver.com/' + BLOG_ID + '/' + logNo, { headers: UA });
     if (!r.ok) return '';
     const html = await r.text();
+    const cands = [];
     const m = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/) ||
               html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/);
-    if (!m) return '';
-    let url = m[1].replace(/&amp;/g, '&');
-    if (!/^https:\/\/[a-z0-9.-]+\.(pstatic\.net|naver\.net|naver\.com)\//.test(url)) return '';
-    if (/blogpfthumb|profile|og_default|static\.blog/.test(url)) return ''; // 프로필·기본 이미지는 제외
-    url = url.replace(/([?&])type=[^&]+/, '$1type=w800');
-    const ir = await fetch(url, { headers: { ...UA, Referer: 'https://m.blog.naver.com/' } });
-    if (!ir.ok || !/^image\//.test(ir.headers.get('content-type') || '')) return '';
-    const buf = Buffer.from(await ir.arrayBuffer());
-    if (buf.length < 2000 || buf.length > 3000000) return '';
-    fs.mkdirSync('blogimg', { recursive: true });
-    fs.writeFileSync(file, buf);
-    return file;
+    if (m) cands.push(m[1]);
+    // 대표 사진이 없으면 본문의 첫 사진들을 차례로 시도
+    (html.match(/https:\/\/(?:mblogthumb-phinf|postfiles|blogfiles|blogthumb)\.pstatic\.net\/[^"'\s\\<>)]+/g) || []).slice(0, 4).forEach((u) => cands.push(u));
+    for (let url of cands) {
+      url = url.replace(/&amp;/g, '&');
+      if (!/^https:\/\/[a-z0-9.-]+\.(pstatic\.net|naver\.net|naver\.com)\//.test(url)) continue;
+      if (/blogpfthumb|blogpfp|profile|og_default|static\.blog|\.gif(\?|$)/i.test(url)) continue; // 프로필·기본 이미지는 제외
+      url = /[?&]type=/.test(url) ? url.replace(/([?&])type=[^&]+/, '$1type=w800') : url + (url.includes('?') ? '&' : '?') + 'type=w800';
+      const ir = await fetch(url, { headers: { ...UA, Referer: 'https://m.blog.naver.com/' } });
+      if (!ir.ok || !/^image\/(jpeg|png|webp)/.test(ir.headers.get('content-type') || '')) continue;
+      const buf = Buffer.from(await ir.arrayBuffer());
+      if (buf.length < 5000 || buf.length > 3000000) continue;
+      fs.mkdirSync('blogimg', { recursive: true });
+      fs.writeFileSync(file, buf);
+      return file;
+    }
+    return '';
   } catch (e) { return ''; }
 }
 (async () => {

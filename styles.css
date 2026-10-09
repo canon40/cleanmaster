@@ -167,3 +167,19 @@ a.card{display:block}
 
 /* 상담전화 두 개 표시 */
 .tel a{display:block;font-size:16.5px;line-height:1.3}
+
+/* 서비스 상세: 글자와 사진 */
+.svc h2{font-size:24px;margin:56px 0 20px}.svc h2:first-child{margin-top:0}
+.svc-p{color:var(--sub);font-size:17.5px}
+.bullets{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bullets li{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:15px 18px 15px 40px;position:relative;font-size:16.5px}
+.bullets li::before{content:"";position:absolute;left:18px;top:25px;width:8px;height:8px;background:var(--accent);border-radius:1px}
+.svc-photos{display:grid;gap:14px}.svc-photos.c3{grid-template-columns:repeat(3,1fr)}.svc-photos.c2{grid-template-columns:1fr 1fr}
+.svc-photos figure{margin:0}
+.svc-photos img{display:block;width:100%;height:auto;border-radius:var(--radius);border:1px solid var(--line)}
+.svc-photos figcaption{text-align:center;color:var(--sub);font-size:14px;margin-top:8px}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;counter-reset:none}
+.flow li{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+.flow b{display:block;color:var(--accent);font-size:12.5px;letter-spacing:.1em;margin-bottom:4px}
+.flow span{font-weight:700;font-size:17px}
+@media (max-width:900px){.bullets{grid-template-columns:1fr}.svc-photos.c3{grid-template-columns:1fr 1fr}.flow{grid-template-columns:1fr 1fr}.svc h2{font-size:21px;margin-top:40px}}

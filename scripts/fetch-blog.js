@@ -1,7 +1,7 @@
 // 네이버 블로그 RSS를 읽어 blog.json 으로 저장하고, 글마다 대표 사진을 blogimg/ 에 내려받습니다.
 // GitHub Actions 가 주기적으로 실행합니다.
 const fs = require('fs');
-const BLOG_ID = 'jangsang40';
+const MEMBERS = JSON.parse(fs.readFileSync('members.json', 'utf8')).filter((m) => /^[A-Za-z0-9_-]{3,30}$/.test(m.blog || ''));
 const UA = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Safari/537.36' };
 
 // 제목에 들어 있는 낱말로 분류합니다. 위에서부터 먼저 맞는 분류가 선택됩니다.
@@ -26,7 +26,7 @@ function clean(s) {
   return s.replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/\s+/g, ' ').trim();
 }
-async function cover(logNo) {
+async function cover(BLOG_ID, logNo) {
   const file = 'blogimg/' + logNo + '.jpg';
   if (fs.existsSync(file) && fs.statSync(file).size > 2000) return file;
   try {
@@ -56,25 +56,32 @@ async function cover(logNo) {
   } catch (e) { return ''; }
 }
 (async () => {
-  const r = await fetch('https://rss.blog.naver.com/' + BLOG_ID + '.xml', { headers: UA });
-  if (!r.ok) throw new Error('RSS ' + r.status);
-  const xml = await r.text();
   const posts = [];
-  for (const it of xml.match(/<item>[\s\S]*?<\/item>/g) || []) {
-    const title = clean(pick(it, 'title'));
-    const link = pick(it, 'link').split('?')[0];
-    const logNo = (link.match(/\/(\d{6,})$/) || [])[1];
-    if (!title || !logNo) continue;
-    const d = new Date(pick(it, 'pubDate'));
-    posts.push({
-      title, link,
-      date: isNaN(d) ? '' : new Date(d.getTime() + 9 * 3600000).toISOString().slice(0, 10).replace(/-/g, '.'),
-      cat: classify(title),
-      summary: clean(pick(it, 'description')).slice(0, 160),
-      img: await cover(logNo),
-    });
+  for (const mb of MEMBERS) {
+    const BLOG_ID = mb.blog;
+    let xml = '';
+    try {
+      const r = await fetch('https://rss.blog.naver.com/' + BLOG_ID + '.xml', { headers: UA });
+      if (!r.ok) throw new Error('RSS ' + r.status);
+      xml = await r.text();
+    } catch (e) { console.error(BLOG_ID, String(e)); continue; }
+    for (const it of xml.match(/<item>[\s\S]*?<\/item>/g) || []) {
+      const title = clean(pick(it, 'title'));
+      const link = pick(it, 'link').split('?')[0];
+      const logNo = (link.match(/\/(\d{6,})$/) || [])[1];
+      if (!title || !logNo) continue;
+      const d = new Date(pick(it, 'pubDate'));
+      posts.push({
+        title, link, no: logNo, blog: BLOG_ID, member: mb.id,
+        date: isNaN(d) ? '' : new Date(d.getTime() + 9 * 3600000).toISOString().slice(0, 10).replace(/-/g, '.'),
+        cat: classify(title),
+        summary: clean(pick(it, 'description')).slice(0, 160),
+        img: await cover(BLOG_ID, logNo),
+      });
+    }
   }
   if (!posts.length) throw new Error('no posts');
-  fs.writeFileSync('blog.json', JSON.stringify({ blog: BLOG_ID, updated: new Date().toISOString(), posts }, null, 1));
+  posts.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+  fs.writeFileSync('blog.json', JSON.stringify({ updated: new Date().toISOString(), posts }, null, 1));
   console.log('posts:', posts.length, 'with image:', posts.filter((p) => p.img).length);
 })().catch((e) => { console.error(e); process.exit(1); });

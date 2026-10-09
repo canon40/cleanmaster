@@ -109,3 +109,18 @@ a.card{display:block}
 .pager{display:flex;justify-content:space-between;gap:12px;max-width:954px;margin:28px auto 0;font-size:15.5px;color:var(--sub)}
 .pager a{padding:12px 0}.pager a:hover{color:var(--accent)}
 @media (max-width:900px){.gallery{grid-template-columns:1fr 1fr;gap:10px}.detail{padding:8px}.page-head{padding:44px 0}.pager{font-size:14px}}
+
+/* 첫 화면: 작업 사진으로 업종을 바로 보여 줌 */
+.hero{padding:64px 0 60px}
+.hero h1{font-size:clamp(30px,4.2vw,46px)}
+.hero-photos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hero-photos a{display:block;border-radius:14px;overflow:hidden;border:1px solid var(--line);transition:transform .15s,border-color .15s}
+.hero-photos a:hover{transform:translateY(-3px);border-color:var(--accent)}
+.hero-photos img{display:block;width:100%;height:auto}
+.promise{border-bottom:1px solid var(--line);background:var(--bg2)}
+.promise ul{display:grid;grid-template-columns:repeat(3,1fr)}
+.promise li{padding:26px 24px 26px 0;display:grid;grid-template-columns:36px 1fr;column-gap:6px}
+.promise li+li{padding-left:24px;border-left:1px solid var(--line)}
+.promise b{color:var(--accent);font-size:14px;font-weight:600;grid-row:span 2;padding-top:4px}
+.promise span{font-weight:700}.promise p{color:var(--sub);font-size:15px}
+@media (max-width:900px){.hero{padding:36px 0 40px}.promise ul{grid-template-columns:1fr}.promise li,.promise li+li{padding:18px 0;border-left:0;border-bottom:1px solid var(--line)}.promise li:last-child{border-bottom:0}}

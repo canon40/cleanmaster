@@ -106,6 +106,7 @@
       var m = members.filter(function (x) { return x.blog === blog; })[0];
       if (!m || !no) { location.replace('community.html'); return; }   // 등록된 회원의 글만 엽니다
       frame.src = 'https://m.blog.naver.com/' + m.blog + '/' + no;
+      var op = document.getElementById('post-open'); if (op) op.href = 'https://blog.naver.com/' + m.blog + '/' + no;
       var mine = posts.filter(function (p) { return p.blog === m.blog; });
       var i = -1; mine.forEach(function (p, k) { if (p.no === no) i = k; });
       var cur = mine[i];

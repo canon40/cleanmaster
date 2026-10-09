@@ -183,3 +183,14 @@ a.card{display:block}
 .flow b{display:block;color:var(--accent);font-size:12.5px;letter-spacing:.1em;margin-bottom:4px}
 .flow span{font-weight:700;font-size:17px}
 @media (max-width:900px){.bullets{grid-template-columns:1fr}.svc-photos.c3{grid-template-columns:1fr 1fr}.flow{grid-template-columns:1fr 1fr}.svc h2{font-size:21px;margin-top:40px}}
+
+/* 상단 분야 메뉴: 누르면 해당 페이지로 바로 이동 */
+.catbar{border-top:1px solid var(--line);background:var(--bg2)}
+.catbar .wrap{display:flex;gap:4px;justify-content:space-between;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.catbar .wrap::-webkit-scrollbar{display:none}
+.catbar a{flex:none;padding:13px 8px;font-size:15px;font-weight:600;color:var(--text);border-bottom:2px solid transparent;white-space:nowrap}
+.catbar a:hover{color:var(--accent)}
+.catbar a[aria-current="page"]{color:var(--accent);border-bottom-color:var(--accent)}
+html{scroll-padding-top:136px}
+@media (max-width:900px){.catbar a{padding:12px 11px;font-size:15px}.nav{top:72px}}
+@media (max-width:900px){.catbar .wrap{justify-content:flex-start}}

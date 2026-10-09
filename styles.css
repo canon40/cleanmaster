@@ -96,7 +96,7 @@ h3{font-size:20px;font-weight:700}
 /* 서비스 카드 링크, 작업 분야, 상세 페이지 */
 a.card{display:block}
 .card .more{display:inline-block;margin-top:18px;font-size:14.5px;color:var(--accent);font-weight:600}
-.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .gallery a{display:block;border-radius:14px;overflow:hidden;border:1px solid var(--line);transition:transform .15s,border-color .15s}
 .gallery a:hover{transform:translateY(-3px);border-color:var(--accent)}
 .gallery img{display:block;width:100%;height:auto;filter:brightness(.92)}

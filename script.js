@@ -22,8 +22,17 @@
     if (e.target.tagName === 'A') { nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); }
   });
 
+  // 카카오톡 문의: 카카오톡 채널 또는 오픈채팅 주소를 아래에 넣으면 버튼이 나타납니다.
+  // 예) 'https://pf.kakao.com/_abcde/chat' 또는 'https://open.kakao.com/o/abcdefg'
+  var KAKAO_URL = '';
+  document.querySelectorAll('[data-kakao]').forEach(function (a) {
+    if (KAKAO_URL) { a.href = KAKAO_URL; a.target = '_blank'; a.rel = 'noopener'; }
+    else { a.hidden = true; }
+  });
+
   // 네이버 블로그 최신 글 (api/blog.js 가 RSS를 읽어 전달)
   var box = document.getElementById('posts');
+  if (!box) return;
   var BLOG = 'https://blog.naver.com/jangsang40';
   function fallback() {
     box.innerHTML = '';

@@ -12,7 +12,7 @@ h1,h2,h3,p,ul,ol,dl,dd{margin:0}ul,ol{padding:0;list-style:none}
 .eyebrow{color:var(--accent);font-size:13px;letter-spacing:.14em;font-weight:600;margin-bottom:14px}
 
 .site-header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.header-row{display:flex;align-items:center;gap:28px;height:72px}
+.header-row{display:flex;align-items:center;gap:28px;height:108px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;letter-spacing:-.01em;color:var(--text)}
 .brand svg{color:var(--accent)}
 .brand small{display:block;font-size:11px;font-weight:500;color:var(--sub);letter-spacing:.04em;line-height:1.2}
@@ -165,8 +165,8 @@ a.card{display:block}
 .post-imgs img{display:block;max-width:100%;height:auto;border-radius:var(--radius);border:1px solid var(--line)}
 @media (max-width:900px){.works{grid-template-columns:1fr 1fr;gap:12px}.work-body{padding:12px 12px 14px}.work h3{font-size:14.5px}}
 
-/* 상담전화 두 개 표시 */
-.tel a{display:block;font-size:16.5px;line-height:1.3}
+/* 상담전화 */
+.tel a{display:block;font-size:28px;line-height:1.2;font-weight:800;letter-spacing:.01em}
 
 /* 서비스 상세: 글자와 사진 */
 .svc h2{font-size:24px;margin:56px 0 20px}.svc h2:first-child{margin-top:0}
@@ -203,13 +203,14 @@ html{scroll-padding-top:136px}
 .head-photos a:hover img{transform:scale(1.04)}
 @media (max-width:900px){.page-head.split .wrap{grid-template-columns:1fr;gap:24px}.page-head.split .head-photos{order:-1}}
 
-/* 로고 */
-.header-row{height:84px}
-.brand{gap:14px;font-size:27px}
-.brand-logo{width:60px;height:60px;border-radius:50%;display:block;flex:none;box-shadow:0 0 0 1px var(--line)}
-.brand small{font-size:11.5px;letter-spacing:.06em;margin-bottom:2px}
-html{scroll-padding-top:148px}
-@media (max-width:900px){.header-row{height:72px}.brand{font-size:22px;gap:10px}.brand-logo{width:50px;height:50px}.brand small{font-size:10px}.nav{top:72px}}
+/* 로고 · 헤더 1.5배 */
+.header-row{height:126px}
+.brand{gap:16px;font-size:40px}
+.brand-logo{width:90px;height:90px;border-radius:50%;display:block;flex:none;box-shadow:0 0 0 1px var(--line)}
+.brand small{font-size:14px;letter-spacing:.06em;margin-bottom:4px}
+.nav{font-size:17px;gap:28px}
+html{scroll-padding-top:210px}
+@media (max-width:900px){.header-row{height:96px}.brand{font-size:26px;gap:12px}.brand-logo{width:64px;height:64px}.brand small{font-size:11px}.tel a{font-size:20px}.nav{top:96px}}
 
 /* 회사소개 */
 .about-head{text-align:center}.about-head .wrap{display:block}

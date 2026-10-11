@@ -175,16 +175,16 @@ a.card{display:block}
 .hero-photos img{display:block;width:100%;height:auto}
 .promise{border-bottom:1px solid var(--line);background:var(--bg2)}
 .promise ul{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
-.promise li{padding:28px 0;display:flex;flex-direction:column;gap:14px;min-width:0}
-.promise li+li{padding-left:28px;margin-left:28px;border-left:1px solid var(--line)}
+.promise li{padding:28px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;min-width:0}
+.promise li+li{border-left:1px solid var(--line)}
 .promise-ico{
-  width:72px;height:72px;border-radius:50%;
-  display:grid;place-items:center;flex:none;
+  width:112px;height:112px;border-radius:50%;
+  display:grid;place-items:center;flex:none;margin:0 auto;
   color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);
   border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));
 }
-.promise-ico svg{width:40px;height:40px}
-.promise-body{display:grid;grid-template-columns:36px 1fr;column-gap:8px;align-content:start}
+.promise-ico svg{width:64px;height:64px}
+.promise-body{display:grid;grid-template-columns:36px 1fr;column-gap:8px;align-content:start;text-align:left;width:100%;max-width:320px}
 .promise b{color:var(--accent);font-size:14px;font-weight:600;grid-row:span 2;padding-top:3px}
 .promise span{font-weight:700}.promise p{color:var(--sub);font-size:15px;margin-top:4px}
 @media (max-width:1100px){
@@ -192,10 +192,11 @@ a.card{display:block}
   .hero-grid,.contact{grid-template-columns:1fr;gap:28px}
   .hero-photos{grid-template-columns:1fr 1fr;gap:8px}
   .promise ul{grid-template-columns:1fr}
-  .promise li,.promise li+li{padding:18px 0;margin-left:0;border-left:0;border-bottom:1px solid var(--line);flex-direction:row;align-items:center;gap:16px}
+  .promise li,.promise li+li{padding:22px 0;border-left:0;border-bottom:1px solid var(--line);align-items:center}
   .promise li:last-child{border-bottom:0}
-  .promise-ico{width:56px;height:56px}
-  .promise-ico svg{width:30px;height:30px}
+  .promise-ico{width:88px;height:88px}
+  .promise-ico svg{width:50px;height:50px}
+  .promise-body{max-width:none}
 }
 @media (max-width:900px){.hero{padding:36px 0 40px}.page-head.split .wrap{grid-template-columns:1fr}}
 
@@ -403,10 +404,10 @@ body.reading .reader{flex:1;min-height:0;height:auto;width:100%}
   body.is-home[data-panel="process"] #process,
   body.is-home[data-panel="blog"] #blog,
   body.is-home[data-panel="contact"] #contact{display:block}
-  body.is-home .promise ul{max-width:none;padding:0 28px}
-  body.is-home .promise li{padding:16px 0}
-  body.is-home .promise-ico{width:64px;height:64px}
-  body.is-home .promise-ico svg{width:34px;height:34px}
+  body.is-home .promise ul{max-width:none;padding:0 20px}
+  body.is-home .promise li{padding:18px 16px}
+  body.is-home .promise-ico{width:120px;height:120px}
+  body.is-home .promise-ico svg{width:70px;height:70px}
   body.is-home .hero .wrap{width:100%}
   body.is-home .hero-grid{gap:36px;align-items:center}
   body.is-home .hero h1{font-size:clamp(28px,3.2vw,42px)}

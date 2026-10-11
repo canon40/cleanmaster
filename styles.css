@@ -323,7 +323,7 @@ body.reading .reader{flex:1;min-height:0;height:auto;width:100%}
   .site-header > .header-row.wrap{max-width:none;padding-left:240px;padding-right:28px}
   .catbar{position:fixed;top:110px;left:0;width:216px;height:calc(100vh - 110px);height:calc(100dvh - 110px);overflow-y:auto;border-top:0;border-right:1px solid var(--line);background:var(--bg2);z-index:15}
   .catbar .wrap{flex-direction:column;flex-wrap:nowrap;justify-content:flex-start;gap:2px;padding:18px 0 24px;max-width:none}
-  .catbar .wrap::before{content:"진행 절차";padding:0 20px 10px;font-size:12px;letter-spacing:.14em;color:var(--accent);font-weight:600}
+  .catbar .wrap::before{content:"진행 절차";padding:4px 20px 14px;font-size:18px;letter-spacing:.08em;color:var(--accent);font-weight:700}
   .catbar a{padding:11px 16px 11px 17px;font-size:15px;white-space:normal;line-height:1.35;border-bottom:0;border-left:3px solid transparent}
   .catbar a:hover{background:var(--card)}
   .catbar a[aria-current="page"]{border-left-color:var(--accent);border-bottom-color:transparent;background:var(--card)}

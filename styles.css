@@ -13,6 +13,7 @@ h1,h2,h3,p,ul,ol,dl,dd{margin:0}ul,ol{padding:0;list-style:none}
 .eyebrow{color:var(--accent);font-size:13px;letter-spacing:.14em;font-weight:600;margin-bottom:14px}
 
 .site-header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.site-header > .header-row.wrap{max-width:none;width:100%;margin:0;padding:0 16px 0 8px;justify-content:flex-start;box-sizing:border-box}
 .header-row{display:flex;align-items:center;gap:20px;height:84px;flex-wrap:nowrap;max-width:none}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;letter-spacing:-.01em;color:var(--text);flex:none;white-space:nowrap}
 .brand svg{color:var(--accent)}
@@ -339,7 +340,8 @@ body.reading .reader{flex:1;min-height:0;height:auto;width:100%}
 @media (min-width:1401px){
   body{padding-left:216px}
   .site-header{margin-left:-216px;width:calc(100% + 216px)}
-  .site-header > .header-row.wrap{max-width:none;padding-left:228px;padding-right:24px;justify-content:flex-start}
+  .site-header > .header-row.wrap{max-width:none;padding-left:16px;padding-right:24px;justify-content:flex-start}
+  .site-header .brand{margin-right:12px}
   .catbar{position:fixed;top:110px;left:0;width:216px;height:calc(100vh - 110px);height:calc(100dvh - 110px);overflow-y:auto;border-top:0;border-right:1px solid var(--line);background:var(--bg2);z-index:15}
   .catbar .wrap{flex-direction:column;flex-wrap:nowrap;justify-content:flex-start;gap:2px;padding:18px 0 24px;max-width:none}
   .catbar .wrap::before{content:"진행 절차";padding:4px 20px 14px;font-size:18px;letter-spacing:.08em;color:var(--accent);font-weight:700}
@@ -351,7 +353,7 @@ body.reading .reader{flex:1;min-height:0;height:auto;width:100%}
 }
 @media (min-width:1500px){
   .catbar{top:126px;height:calc(100vh - 126px);height:calc(100dvh - 126px)}
-  .site-header > .header-row.wrap{padding-left:228px;padding-right:28px;justify-content:flex-start}
+  .site-header > .header-row.wrap{padding-left:16px;padding-right:28px;justify-content:flex-start}
 }
 /* 태블릿·노트북: 세로 사이드바 대신 가로 스크롤 카테고리 */
 @media (max-width:1400px){

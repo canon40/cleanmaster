@@ -16,8 +16,8 @@ h1,h2,h3,p,ul,ol,dl,dd{margin:0}ul,ol{padding:0;list-style:none}
 .header-row{display:flex;align-items:center;gap:20px;height:84px;flex-wrap:nowrap;max-width:none}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;letter-spacing:-.01em;color:var(--text);flex:none;white-space:nowrap}
 .brand svg{color:var(--accent)}
-.brand small{display:block;font-size:11px;font-weight:500;color:var(--sub);letter-spacing:.04em;line-height:1.2;white-space:nowrap;margin-top:2px}
-.brand span{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15}
+.brand small{display:block;font-size:15px;font-weight:600;color:var(--sub);letter-spacing:.02em;line-height:1.25;white-space:nowrap;margin-top:4px;text-align:left;align-self:flex-start;width:100%}
+.brand span{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;line-height:1.15;text-align:left}
 .nav{display:flex;flex-wrap:nowrap;align-items:center;gap:18px;margin-left:auto;font-size:15px;flex:none}
 .nav a{color:var(--sub);padding:6px 0;border-bottom:1px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;flex:none}
 .nav a:hover{color:var(--text);border-color:var(--accent)}
@@ -29,7 +29,7 @@ h1,h2,h3,p,ul,ol,dl,dd{margin:0}ul,ol{padding:0;list-style:none}
 .theme-toggle{width:38px;height:38px;border:1px solid var(--line);background:none;color:var(--sub);border-radius:50%;cursor:pointer;display:grid;place-items:center;flex:none}
 .theme-toggle:hover{color:var(--text);border-color:var(--accent)}
 .i-moon{display:none}:root[data-theme="light"] .i-sun{display:none}:root[data-theme="light"] .i-moon{display:block}
-.nav-toggle{display:none;width:42px;height:42px;background:none;border:1px solid var(--line);border-radius:var(--radius);cursor:pointer;padding:11px 10px;margin-left:auto;flex:none}
+.nav-toggle{display:none;width:42px;height:42px;background:none;border:1px solid var(--line);border-radius:var(--radius);cursor:pointer;padding:11px 10px;margin-left:0;flex:none}
 .nav-toggle span{display:block;height:1.5px;background:var(--text);margin:4px 0}
 
 .hero{padding:96px 0 88px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%)}
@@ -83,31 +83,45 @@ h3{font-size:20px;font-weight:700}
 .site-footer strong{color:var(--text)}
 .call-fab{display:none}
 
-/* 중간 폭: 가로 메뉴가  crowding 되면 햄버거로 전환 */
-@media (max-width:1280px){
-  .nav-toggle{display:block;order:3}
-  .header-side{order:2;margin-left:auto}
-  .header-row{height:80px;gap:12px;position:relative}
-  .brand{font-size:24px;gap:10px}
-  .brand-logo{width:52px;height:52px}
-  .brand small{font-size:10px}
-  .nav{display:none;position:absolute;top:80px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 20px 16px;z-index:25;margin-left:0;flex:none}
+/* 노트북: 숨기지 말고 크기만 줄여 한 줄 유지 */
+@media (max-width:1400px){
+  .header-row{height:88px;gap:14px}
+  .brand{font-size:26px;gap:10px}
+  .brand-logo{width:56px;height:56px}
+  .brand small{font-size:16px}
+  .nav{gap:14px;font-size:14px;margin-left:auto}
+  .tel{gap:6px}
+  .tel small{font-size:13px}
+  .tel a{font-size:18px}
+  html{scroll-padding-top:140px}
+}
+/* 태블릿·모바일: 햄버거 + 전화 번호는 유지 */
+@media (max-width:1100px){
+  .nav-toggle{display:grid;place-items:center;order:4;border-color:var(--accent)}
+  .header-side{order:3;margin-left:auto;gap:10px}
+  .brand{order:1}
+  .header-row{height:76px;gap:10px;position:relative;padding-left:16px;padding-right:16px}
+  .brand{font-size:22px;gap:8px;min-width:0}
+  .brand-logo{width:48px;height:48px}
+  .brand small{font-size:15px}
+  .nav{display:none;position:absolute;top:76px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 20px 16px;z-index:30;margin-left:0;flex:none;max-height:calc(100dvh - 76px);overflow-y:auto}
   .nav.open{display:flex}
   .nav a{padding:14px 0;border-bottom:1px solid var(--line);white-space:normal}
-  .header-side .tel{display:none}
-  .tel a{font-size:18px}
+  .tel{gap:6px}
+  .tel small{display:none}
+  .tel a{font-size:16px;font-weight:800}
   html{scroll-padding-top:140px}
 }
 @media (max-width:900px){
   .site-header{position:sticky}
-  .header-row{height:72px;gap:10px}
-  .brand{font-size:20px;gap:8px;min-width:0}
-  .brand-logo{width:44px;height:44px}
-  .brand small{font-size:9px;letter-spacing:.02em}
-  .nav{top:72px}
+  .header-row{height:72px;gap:8px}
+  .brand{font-size:18px;gap:8px}
+  .brand-logo{width:42px;height:42px}
+  .brand small{font-size:11px;letter-spacing:.02em}
+  .nav{top:72px;max-height:calc(100dvh - 72px)}
   .header-side{gap:8px}
   .wrap{padding:0 16px}
-  .header-row.wrap{padding-left:16px;padding-right:16px}
+  .header-row.wrap{padding-left:12px;padding-right:12px}
   .hero{padding:40px 0 36px}.hero-grid,.contact{grid-template-columns:1fr;gap:28px}
   .hero-photos{grid-template-columns:1fr 1fr;gap:8px}
   .cards,.posts{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr;gap:16px}
@@ -118,6 +132,11 @@ h3{font-size:20px;font-weight:700}
   .site-footer{padding:32px 0 110px;font-size:13px}
   html{scroll-padding-top:130px}
   .call-fab{display:flex;position:fixed;left:12px;right:12px;bottom:12px;height:54px;align-items:center;justify-content:center;background:var(--accent);color:var(--on-accent);font-weight:800;border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,.35);z-index:30}
+}
+@media (max-width:480px){
+  .tel a{font-size:14px}
+  .brand{font-size:16px}
+  .brand small{font-size:10px}
 }
 @media (max-width:560px){
   .steps,.works,.gallery,.svc-photos.c3,.svc-photos.c2,.flow,.bullets{grid-template-columns:1fr}
@@ -243,11 +262,11 @@ html{scroll-padding-top:136px}
 @media (max-width:900px){.page-head.split .wrap{grid-template-columns:1fr;gap:24px}.page-head.split .head-photos{order:-1}}
 
 /* 넓은 데스크톱: 헤더를 전체 폭 사용 + 로고 확대 */
-@media (min-width:1281px){
+@media (min-width:1401px){
   .header-row{height:110px;gap:24px;padding-left:24px;padding-right:28px}
   .brand{gap:14px;font-size:32px}
   .brand-logo{width:72px;height:72px}
-  .brand small{font-size:13px;letter-spacing:.06em;margin-top:3px;margin-bottom:0}
+  .brand small{font-size:20px;letter-spacing:.02em;margin-top:4px;margin-bottom:0;text-align:left;font-weight:700}
   .nav{font-size:15.5px;gap:22px}
   .tel a{font-size:24px}
   html{scroll-padding-top:130px}
@@ -256,7 +275,7 @@ html{scroll-padding-top:136px}
   .header-row{height:126px;padding-left:32px;padding-right:36px}
   .brand{gap:16px;font-size:40px}
   .brand-logo{width:90px;height:90px}
-  .brand small{font-size:14px;margin-top:4px;margin-bottom:0}
+  .brand small{font-size:22px;margin-top:5px;margin-bottom:0;text-align:left;font-weight:700}
   .nav{font-size:17px;gap:28px}
   .tel a{font-size:28px}
 }
@@ -317,10 +336,10 @@ body.reading .site-header{flex:none}
 body.reading .reader{flex:1;min-height:0;height:auto;width:100%}
 
 /* 넓은 화면: 분야 메뉴를 왼쪽 세로 메뉴로 */
-@media (min-width:1281px){
+@media (min-width:1401px){
   body{padding-left:216px}
   .site-header{margin-left:-216px;width:calc(100% + 216px)}
-  .site-header > .header-row.wrap{max-width:none;padding-left:240px;padding-right:28px}
+  .site-header > .header-row.wrap{max-width:none;padding-left:228px;padding-right:24px;justify-content:flex-start}
   .catbar{position:fixed;top:110px;left:0;width:216px;height:calc(100vh - 110px);height:calc(100dvh - 110px);overflow-y:auto;border-top:0;border-right:1px solid var(--line);background:var(--bg2);z-index:15}
   .catbar .wrap{flex-direction:column;flex-wrap:nowrap;justify-content:flex-start;gap:2px;padding:18px 0 24px;max-width:none}
   .catbar .wrap::before{content:"진행 절차";padding:4px 20px 14px;font-size:18px;letter-spacing:.08em;color:var(--accent);font-weight:700}
@@ -332,14 +351,14 @@ body.reading .reader{flex:1;min-height:0;height:auto;width:100%}
 }
 @media (min-width:1500px){
   .catbar{top:126px;height:calc(100vh - 126px);height:calc(100dvh - 126px)}
-  .site-header > .header-row.wrap{padding-left:248px;padding-right:36px}
+  .site-header > .header-row.wrap{padding-left:228px;padding-right:28px;justify-content:flex-start}
 }
 /* 태블릿·노트북: 세로 사이드바 대신 가로 스크롤 카테고리 */
-@media (max-width:1280px){
+@media (max-width:1400px){
   body{padding-left:0}
   .site-header{margin-left:0;width:auto}
   .site-header > .header-row.wrap{max-width:none;padding-left:16px;padding-right:16px}
-  .catbar{position:relative;top:auto;left:auto;width:auto;height:auto;border-right:0}
+  .catbar{position:relative;top:auto;left:auto;width:auto;height:auto;border-right:0;overflow:visible}
   .catbar .wrap{flex-direction:row;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0}
   .catbar .wrap::-webkit-scrollbar{display:none}
   .catbar .wrap::before{display:none}

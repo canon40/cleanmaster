@@ -3,10 +3,10 @@
   var btn = document.querySelector('.theme-toggle');
   function apply(t) {
     root.setAttribute('data-theme', t);
-    btn.setAttribute('aria-label', t === 'dark' ? '밝은 화면으로 전환' : '어두운 화면으로 전환');
+    if (btn) btn.setAttribute('aria-label', t === 'dark' ? '밝은 화면으로 전환' : '어두운 화면으로 전환');
   }
   try { var saved = localStorage.getItem('theme'); if (saved) apply(saved); } catch (e) {}
-  btn.addEventListener('click', function () {
+  if (btn) btn.addEventListener('click', function () {
     var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     apply(next);
     try { localStorage.setItem('theme', next); } catch (e) {}
@@ -14,13 +14,187 @@
 
   var nav = document.getElementById('nav');
   var toggle = document.querySelector('.nav-toggle');
-  toggle.addEventListener('click', function () {
-    var open = nav.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open);
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+    });
+    nav.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') { nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); }
+    });
+  }
+
+  /* 노트북+: 카테고리 클릭 시 페이지를 옆으로 전환 */
+  var deskMq = window.matchMedia('(min-width:1101px)');
+  var main = document.getElementById('main');
+  var catbar = document.querySelector('.catbar');
+  var sliding = false;
+
+  function catLinks() {
+    return catbar ? Array.prototype.slice.call(catbar.querySelectorAll('a[href]')) : [];
+  }
+  function linkIndex(href) {
+    var file = (href || '').split('#')[0].split('/').pop() || 'index.html';
+    if (file === '' || file === '.') file = 'index.html';
+    var links = catLinks();
+    for (var i = 0; i < links.length; i++) {
+      var h = (links[i].getAttribute('href') || '').split('#')[0].split('/').pop();
+      if (h === file) return i;
+    }
+    if (file === 'index.html') return -1;
+    return 0;
+  }
+  function currentFile() {
+    var f = location.pathname.split('/').pop() || 'index.html';
+    return f === '' ? 'index.html' : f;
+  }
+  function setCurrent(href) {
+    var file = (href || '').split('#')[0].split('/').pop() || 'index.html';
+    catLinks().forEach(function (a) {
+      var h = (a.getAttribute('href') || '').split('#')[0].split('/').pop();
+      if (h === file) a.setAttribute('aria-current', 'page');
+      else a.removeAttribute('aria-current');
+    });
+  }
+  function bindKakao() {
+    var KAKAO_URL = '';
+    document.querySelectorAll('[data-kakao]').forEach(function (a) {
+      if (KAKAO_URL) { a.href = KAKAO_URL; a.target = '_blank'; a.rel = 'noopener'; a.hidden = false; }
+      else { a.hidden = true; }
+    });
+  }
+  function setPanel(name, push) {
+    var panel = name || 'home';
+    document.body.setAttribute('data-panel', panel);
+    document.body.classList.add('is-home');
+    if (nav) {
+      nav.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        var id = (a.getAttribute('href') || '').slice(1);
+        if (id && id === panel) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+    }
+    if (push !== false) {
+      var hash = panel === 'home' ? 'index.html' : ('index.html#' + panel);
+      history.pushState({ panel: panel }, '', hash);
+    }
+  }
+  function goSide(url, push) {
+    if (!main || !deskMq.matches || sliding) return;
+    var raw = url || '';
+    var hash = raw.indexOf('#') >= 0 ? raw.split('#')[1] : '';
+    var target = raw.split('#')[0] || 'index.html';
+    var file = target.split('/').pop() || 'index.html';
+    if (file === '' || file === '.') file = 'index.html';
+
+    /* 홈 안 패널(#services 등)은 스크롤 없이 화면만 바꿈 */
+    if ((file === 'index.html' || file === currentFile()) && document.body.classList.contains('is-home') && hash) {
+      setPanel(hash, push !== false);
+      return;
+    }
+    if (file === 'index.html' && document.body.classList.contains('is-home') && !hash) {
+      setPanel('home', push !== false);
+      catLinks().forEach(function (a) { a.removeAttribute('aria-current'); });
+      return;
+    }
+
+    var from = linkIndex(currentFile());
+    var to = linkIndex(file);
+    var forward = to >= from;
+    sliding = true;
+    main.classList.add('is-sliding', forward ? 'slide-out-left' : 'slide-out-right');
+    fetch(file, { credentials: 'same-origin' }).then(function (r) {
+      if (!r.ok) throw 0;
+      return r.text();
+    }).then(function (html) {
+      var doc = new DOMParser().parseFromString(html, 'text/html');
+      var nextMain = doc.getElementById('main');
+      if (!nextMain) throw 0;
+      window.setTimeout(function () {
+        main.innerHTML = nextMain.innerHTML;
+        main.classList.remove('slide-out-left', 'slide-out-right');
+        main.classList.add(forward ? 'slide-in-right' : 'slide-in-left');
+        document.title = doc.title || document.title;
+        var isHome = !!nextMain.querySelector('.promise') || file === 'index.html';
+        document.body.classList.toggle('is-home', isHome);
+        if (isHome) document.body.setAttribute('data-panel', hash || 'home');
+        else document.body.removeAttribute('data-panel');
+        setCurrent(file);
+        bindKakao();
+        main.scrollTop = 0;
+        if (push !== false) history.pushState({ side: true, url: file }, '', file + (hash ? '#' + hash : ''));
+        window.setTimeout(function () {
+          main.classList.remove('slide-in-left', 'slide-in-right', 'is-sliding');
+          sliding = false;
+        }, 280);
+      }, 240);
+    }).catch(function () {
+      sliding = false;
+      main.classList.remove('is-sliding', 'slide-out-left', 'slide-out-right');
+      location.href = file;
+    });
+  }
+  if (catbar && main) {
+    catbar.addEventListener('click', function (e) {
+      if (!deskMq.matches) return;
+      var a = e.target.closest('a[href]');
+      if (!a || a.target === '_blank') return;
+      var href = a.getAttribute('href') || '';
+      if (/^(https?:|mailto:|tel:|sms:)/i.test(href)) return;
+      e.preventDefault();
+      var file = (href.split('#')[0].split('/').pop() || 'index.html');
+      if (file === currentFile() && !href.split('#')[1]) return;
+      goSide(href, true);
+    });
+  }
+  if (nav && main) {
+    nav.addEventListener('click', function (e) {
+      if (!deskMq.matches) return;
+      var a = e.target.closest('a[href]');
+      if (!a) return;
+      var href = a.getAttribute('href') || '';
+      if (href.charAt(0) === '#') {
+        e.preventDefault();
+        if (!document.body.classList.contains('is-home')) {
+          goSide('index.html' + href, true);
+        } else {
+          setPanel(href.slice(1) || 'home', true);
+        }
+        return;
+      }
+      if (/^(https?:|mailto:|tel:|sms:)/i.test(href) || a.target === '_blank') return;
+      if (!/\.html/i.test(href)) return;
+      e.preventDefault();
+      goSide(href, true);
+    });
+  }
+  var brand = document.querySelector('.brand');
+  if (brand && main) {
+    brand.addEventListener('click', function (e) {
+      if (!deskMq.matches) return;
+      e.preventDefault();
+      if (document.body.classList.contains('is-home')) {
+        setPanel('home', true);
+        catLinks().forEach(function (a) { a.removeAttribute('aria-current'); });
+        return;
+      }
+      goSide('index.html', true);
+    });
+  }
+  window.addEventListener('popstate', function (ev) {
+    if (!deskMq.matches) return;
+    if (ev.state && ev.state.panel) {
+      if (!document.body.classList.contains('is-home')) goSide('index.html#' + ev.state.panel, false);
+      else setPanel(ev.state.panel, false);
+      return;
+    }
+    goSide(currentFile() + (location.hash || ''), false);
   });
-  nav.addEventListener('click', function (e) {
-    if (e.target.tagName === 'A') { nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); }
-  });
+  if (deskMq.matches && document.body.classList.contains('is-home')) {
+    var start = (location.hash || '#home').slice(1) || 'home';
+    if (start === 'top') start = 'home';
+    document.body.setAttribute('data-panel', start);
+  }
 
   // 카카오톡 문의: 카카오톡 채널 또는 오픈채팅 주소를 아래에 넣으면 버튼이 나타납니다.
   // 예) 'https://pf.kakao.com/_abcde/chat' 또는 'https://open.kakao.com/o/abcdefg'

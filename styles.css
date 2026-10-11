@@ -103,7 +103,7 @@ h3{font-size:20px;font-weight:700}
   .header-row{height:76px;gap:10px;position:relative;padding-left:16px;padding-right:16px}
   .brand{font-size:22px;gap:8px;min-width:0}
   .brand-logo{width:48px;height:48px}
-  .brand small{font-size:13px}
+  .brand small{font-size:15px}
   .nav{display:none;position:absolute;top:76px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 20px 16px;z-index:30;margin-left:0;flex:none;max-height:calc(100dvh - 76px);overflow-y:auto}
   .nav.open{display:flex}
   .nav a{padding:14px 0;border-bottom:1px solid var(--line);white-space:normal}
@@ -266,7 +266,7 @@ html{scroll-padding-top:136px}
   .header-row{height:110px;gap:24px;padding-left:24px;padding-right:28px}
   .brand{gap:14px;font-size:32px}
   .brand-logo{width:72px;height:72px}
-  .brand small{font-size:17px;letter-spacing:.02em;margin-top:4px;margin-bottom:0;text-align:left}
+  .brand small{font-size:20px;font-weight:700;letter-spacing:.02em;margin-top:4px;margin-bottom:0;text-align:left}
   .nav{font-size:15.5px;gap:22px}
   .tel a{font-size:24px}
   html{scroll-padding-top:130px}
@@ -275,7 +275,7 @@ html{scroll-padding-top:136px}
   .header-row{height:126px;padding-left:32px;padding-right:36px}
   .brand{gap:16px;font-size:40px}
   .brand-logo{width:90px;height:90px}
-  .brand small{font-size:18px;margin-top:5px;margin-bottom:0;text-align:left}
+  .brand small{font-size:22px;font-weight:700;margin-top:5px;margin-bottom:0;text-align:left}
   .nav{font-size:17px;gap:28px}
   .tel a{font-size:28px}
 }
@@ -339,7 +339,7 @@ body.reading .reader{flex:1;min-height:0;height:auto;width:100%}
 @media (min-width:1401px){
   body{padding-left:216px}
   .site-header{margin-left:-216px;width:calc(100% + 216px)}
-  .site-header > .header-row.wrap{max-width:none;padding-left:240px;padding-right:28px}
+  .site-header > .header-row.wrap{max-width:none;padding-left:228px;padding-right:24px;justify-content:flex-start}
   .catbar{position:fixed;top:110px;left:0;width:216px;height:calc(100vh - 110px);height:calc(100dvh - 110px);overflow-y:auto;border-top:0;border-right:1px solid var(--line);background:var(--bg2);z-index:15}
   .catbar .wrap{flex-direction:column;flex-wrap:nowrap;justify-content:flex-start;gap:2px;padding:18px 0 24px;max-width:none}
   .catbar .wrap::before{content:"진행 절차";padding:4px 20px 14px;font-size:18px;letter-spacing:.08em;color:var(--accent);font-weight:700}
@@ -351,7 +351,7 @@ body.reading .reader{flex:1;min-height:0;height:auto;width:100%}
 }
 @media (min-width:1500px){
   .catbar{top:126px;height:calc(100vh - 126px);height:calc(100dvh - 126px)}
-  .site-header > .header-row.wrap{padding-left:248px;padding-right:36px}
+  .site-header > .header-row.wrap{padding-left:228px;padding-right:28px;justify-content:flex-start}
 }
 /* 태블릿·노트북: 세로 사이드바 대신 가로 스크롤 카테고리 */
 @media (max-width:1400px){

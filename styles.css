@@ -18,8 +18,8 @@ h1,h2,h3,p,ul,ol,dl,dd{margin:0}ul,ol{padding:0;list-style:none}
 .header-row{display:flex;align-items:center;gap:20px;height:84px;flex-wrap:nowrap;max-width:none}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;letter-spacing:-.01em;color:var(--text);flex:none;white-space:nowrap}
 .brand svg{color:var(--accent)}
-.brand small{display:block;font-size:18px;font-weight:700;color:var(--sub);letter-spacing:.02em;line-height:1.3;white-space:nowrap;margin-top:4px;text-align:left;align-self:flex-start;width:auto}
-.brand span{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;line-height:1.15;text-align:left}
+.brand small{display:inline;font-size:16px;font-weight:700;color:var(--sub);letter-spacing:.02em;line-height:1;white-space:nowrap;margin:0 0 0 10px;text-align:left;align-self:baseline;width:auto}
+.brand span{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:baseline;justify-content:flex-start;line-height:1.15;text-align:left}
 .nav{display:flex;flex-wrap:nowrap;align-items:center;gap:18px;margin-left:auto;font-size:15px;flex:none}
 .nav a{color:var(--sub);padding:6px 0;border-bottom:1px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;flex:none}
 .nav a:hover{color:var(--text);border-color:var(--accent)}
@@ -120,7 +120,7 @@ h3{font-size:20px;font-weight:700}
   .header-row{height:72px;gap:8px}
   .brand{font-size:18px;gap:8px}
   .brand-logo{width:42px;height:42px}
-  .brand small{font-size:11px;letter-spacing:.02em}
+  .brand small{font-size:12px;letter-spacing:.02em;margin-left:8px}
   .nav{top:72px;max-height:calc(100dvh - 72px)}
   .header-side{gap:8px}
   .wrap{padding:0 16px}
@@ -138,7 +138,7 @@ h3{font-size:20px;font-weight:700}
 @media (max-width:480px){
   .tel a{font-size:14px}
   .brand{font-size:16px}
-  .brand small{font-size:10px}
+  .brand small{font-size:11px;margin-left:6px}
 }
 @media (max-width:560px){
   .steps,.works,.gallery,.svc-photos.c3,.svc-photos.c2,.flow,.bullets{grid-template-columns:1fr}
@@ -281,7 +281,7 @@ html{scroll-padding-top:136px}
   .site-header > .header-row.wrap{padding:0 24px 0 8px}
   .brand{gap:14px;font-size:32px}
   .brand-logo{width:72px;height:72px}
-  .brand small{font-size:20px;font-weight:700;letter-spacing:.02em;margin-top:4px;margin-bottom:0;text-align:left}
+  .brand small{font-size:18px;font-weight:700;letter-spacing:.02em;margin:0 0 0 12px;text-align:left}
   .nav{font-size:15.5px;gap:22px}
   .tel a{font-size:24px}
   html{scroll-padding-top:130px}
@@ -291,7 +291,7 @@ html{scroll-padding-top:136px}
   .site-header > .header-row.wrap{padding:0 28px 0 8px}
   .brand{gap:16px;font-size:40px}
   .brand-logo{width:90px;height:90px}
-  .brand small{font-size:22px;font-weight:700;margin-top:5px;margin-bottom:0;text-align:left}
+  .brand small{font-size:20px;font-weight:700;margin:0 0 0 14px;text-align:left}
   .nav{font-size:17px;gap:28px}
   .tel a{font-size:28px}
 }

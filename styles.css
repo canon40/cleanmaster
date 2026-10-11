@@ -113,6 +113,11 @@ h3{font-size:20px;font-weight:700}
   .tel{gap:6px}
   .tel small{display:none}
   .tel a{font-size:16px;font-weight:800}
+  .hero{padding:48px 0 40px}.hero-grid,.contact{grid-template-columns:1fr;gap:28px}
+  .hero-photos{grid-template-columns:1fr 1fr;gap:8px}
+  .promise ul{grid-template-columns:1fr}
+  .promise li,.promise li+li{padding:16px 0;border-left:0;border-bottom:1px solid var(--line)}
+  .promise li:last-child{border-bottom:0}
   html{scroll-padding-top:140px}
 }
 @media (max-width:900px){
@@ -125,8 +130,7 @@ h3{font-size:20px;font-weight:700}
   .header-side{gap:8px}
   .wrap{padding:0 16px}
   .site-header > .header-row.wrap{padding:0 12px 0 8px}
-  .hero{padding:40px 0 36px}.hero-grid,.contact{grid-template-columns:1fr;gap:28px}
-  .hero-photos{grid-template-columns:1fr 1fr;gap:8px}
+  .hero{padding:40px 0 36px}
   .cards,.posts{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr;gap:16px}
   .section{padding:52px 0 72px}
   .section-head{margin-bottom:28px}
@@ -180,7 +184,7 @@ a.card{display:block}
 .promise li+li{padding-left:24px;border-left:1px solid var(--line)}
 .promise b{color:var(--accent);font-size:14px;font-weight:600;grid-row:span 2;padding-top:4px}
 .promise span{font-weight:700}.promise p{color:var(--sub);font-size:15px}
-@media (max-width:900px){.hero{padding:36px 0 40px}.promise ul{grid-template-columns:1fr}.promise li,.promise li+li{padding:18px 0;border-left:0;border-bottom:1px solid var(--line)}.promise li:last-child{border-bottom:0}.page-head.split .wrap{grid-template-columns:1fr}}
+@media (max-width:900px){.hero{padding:36px 0 40px}.page-head.split .wrap{grid-template-columns:1fr}}
 
 /* 카카오톡 · 문자 문의 버튼, 진행 절차 그림 */
 .btn.kakao{background:#fee500;border-color:#fee500;color:#191600;gap:8px}
@@ -242,15 +246,15 @@ a.card{display:block}
 @media (max-width:900px){.bullets{grid-template-columns:1fr}.svc-photos.c3{grid-template-columns:1fr 1fr}.flow{grid-template-columns:1fr 1fr}.svc h2{font-size:21px;margin-top:40px}}
 
 /* 상단 분야 메뉴: 누르면 해당 페이지로 바로 이동 */
-.catbar{border-top:1px solid var(--line);background:var(--bg2)}
-.catbar .wrap{display:flex;gap:4px;justify-content:space-between;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.catbar{border-top:1px solid var(--line);background:var(--bg2);max-width:100%;min-width:0}
+.catbar .wrap{display:flex;gap:4px;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;max-width:100%;min-width:0;width:100%;box-sizing:border-box}
 .catbar .wrap::-webkit-scrollbar{display:none}
 .catbar a{flex:none;padding:13px 8px;font-size:15px;font-weight:600;color:var(--text);border-bottom:2px solid transparent;white-space:nowrap}
 .catbar a:hover{color:var(--accent)}
 .catbar a[aria-current="page"]{color:var(--accent);border-bottom-color:var(--accent)}
 html{scroll-padding-top:136px}
 @media (max-width:900px){
-  .catbar{position:relative;overflow:hidden}
+  .catbar{position:relative;overflow:visible}
   .catbar .wrap{justify-content:flex-start;padding:0 4px}
   .catbar a{padding:12px 11px;font-size:14px}
   .nav{top:72px}
@@ -331,8 +335,8 @@ body.reading{overflow:hidden}
 .svc-sub{color:var(--accent);font-weight:600;font-size:17px;margin:8px 0 2px}
 .catbar a{padding:13px 6px;font-size:14px}
 @media (max-width:1180px){.catbar .wrap{justify-content:flex-start}.catbar a{padding:13px 10px}}
-@media (min-width:901px){
-  .catbar .wrap{flex-wrap:wrap;justify-content:flex-start;gap:0 6px;padding-top:4px;padding-bottom:4px}
+@media (min-width:1101px) and (max-width:1400px){
+  .catbar .wrap{flex-wrap:wrap;justify-content:flex-start;gap:0 6px;padding-top:4px;padding-bottom:4px;overflow-x:visible}
   .catbar a{padding:8px 9px;font-size:14.5px}
   html{scroll-padding-top:190px}
 }
@@ -359,14 +363,17 @@ body.reading .reader{flex:1;min-height:0;height:auto;width:100%}
   .catbar{top:126px;height:calc(100vh - 126px);height:calc(100dvh - 126px)}
   .site-header > .header-row.wrap{padding:0 28px 0 8px}
 }
-/* 태블릿·노트북: 세로 사이드바 대신 가로 스크롤 카테고리 */
+/* 태블릿·노트북: 세로 사이드바 대신 가로 카테고리 */
 @media (max-width:1400px){
   body{padding-left:0}
-  .site-header{margin-left:0;width:auto}
+  .site-header{margin-left:0;width:auto;max-width:100%}
   .site-header > .header-row.wrap{max-width:none;width:100%;margin:0;padding:0 12px 0 8px}
-  .catbar{position:relative;top:auto;left:auto;width:auto;height:auto;border-right:0;overflow:visible}
-  .catbar .wrap{flex-direction:row;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0}
-  .catbar .wrap::-webkit-scrollbar{display:none}
+  .catbar{position:relative;top:auto;left:auto;width:100%;max-width:100%;height:auto;border-right:0;overflow:visible}
+  .catbar .wrap{flex-direction:row;padding:0}
   .catbar .wrap::before{display:none}
   .catbar a{white-space:nowrap;border-left:0}
+}
+@media (max-width:1100px){
+  .catbar .wrap{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .catbar .wrap::-webkit-scrollbar{display:none}
 }

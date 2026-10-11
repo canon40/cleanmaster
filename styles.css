@@ -18,8 +18,8 @@ h1,h2,h3,p,ul,ol,dl,dd{margin:0}ul,ol{padding:0;list-style:none}
 .header-row{display:flex;align-items:center;gap:20px;height:84px;flex-wrap:nowrap;max-width:none}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;letter-spacing:-.01em;color:var(--text);flex:none;white-space:nowrap}
 .brand svg{color:var(--accent)}
-.brand small{display:inline;font-size:16px;font-weight:700;color:var(--sub);letter-spacing:.02em;line-height:1;white-space:nowrap;margin:0 0 0 10px;text-align:left;align-self:baseline;width:auto}
-.brand span{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:baseline;justify-content:flex-start;line-height:1.15;text-align:left}
+.brand small{display:flex;flex-direction:column;justify-content:center;font-size:14px;font-weight:700;color:var(--sub);letter-spacing:.02em;line-height:1.25;white-space:normal;margin:0 0 0 12px;text-align:left;align-self:center;width:auto}
+.brand span{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:flex-start;line-height:1.15;text-align:left}
 .nav{display:flex;flex-wrap:nowrap;align-items:center;gap:18px;margin-left:auto;font-size:15px;flex:none}
 .nav a{color:var(--sub);padding:6px 0;border-bottom:1px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;flex:none}
 .nav a:hover{color:var(--text);border-color:var(--accent)}
@@ -87,10 +87,10 @@ h3{font-size:20px;font-weight:700}
 
 /* 노트북: 숨기지 말고 크기만 줄여 한 줄 유지 */
 @media (max-width:1400px){
-  .header-row{height:88px;gap:14px}
-  .brand{font-size:26px;gap:10px}
-  .brand-logo{width:56px;height:56px}
-  .brand small{font-size:16px}
+  .header-row{height:96px;gap:14px}
+  .brand{font-size:26px;gap:12px}
+  .brand-logo{width:72px;height:72px}
+  .brand small{font-size:13px}
   .nav{gap:14px;font-size:14px;margin-left:auto}
   .tel{gap:6px}
   .tel small{font-size:13px}
@@ -102,11 +102,11 @@ h3{font-size:20px;font-weight:700}
   .nav-toggle{display:grid;place-items:center;order:4;border-color:var(--accent)}
   .header-side{order:3;margin-left:auto;gap:10px}
   .brand{order:1}
-  .header-row{height:76px;gap:10px;position:relative}
+  .header-row{height:84px;gap:10px;position:relative}
   .site-header > .header-row.wrap{padding:0 12px 0 8px}
-  .brand{font-size:22px;gap:8px;min-width:0}
-  .brand-logo{width:48px;height:48px}
-  .brand small{font-size:15px}
+  .brand{font-size:22px;gap:10px;min-width:0}
+  .brand-logo{width:64px;height:64px}
+  .brand small{font-size:12px}
   .nav{display:none;position:absolute;top:76px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 20px 16px;z-index:30;margin-left:0;flex:none;max-height:calc(100dvh - 76px);overflow-y:auto}
   .nav.open{display:flex}
   .nav a{padding:14px 0;border-bottom:1px solid var(--line);white-space:normal}
@@ -117,10 +117,10 @@ h3{font-size:20px;font-weight:700}
 }
 @media (max-width:900px){
   .site-header{position:sticky}
-  .header-row{height:72px;gap:8px}
+  .header-row{height:78px;gap:8px}
   .brand{font-size:18px;gap:8px}
-  .brand-logo{width:42px;height:42px}
-  .brand small{font-size:12px;letter-spacing:.02em;margin-left:8px}
+  .brand-logo{width:56px;height:56px}
+  .brand small{font-size:11px;letter-spacing:.02em;margin-left:8px}
   .nav{top:72px;max-height:calc(100dvh - 72px)}
   .header-side{gap:8px}
   .wrap{padding:0 16px}
@@ -184,7 +184,7 @@ a.card{display:block}
   border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));
 }
 .promise-ico svg{width:64px;height:64px}
-.promise-body{display:grid;grid-template-columns:36px 1fr;column-gap:8px;align-content:start;text-align:left;width:100%;max-width:320px}
+.promise-body{display:grid;grid-template-columns:auto 1fr;column-gap:8px;justify-content:center;align-content:start;text-align:left;width:auto;max-width:300px;margin:0 auto}
 .promise b{color:var(--accent);font-size:14px;font-weight:600;grid-row:span 2;padding-top:3px}
 .promise span{font-weight:700}.promise p{color:var(--sub);font-size:15px;margin-top:4px}
 @media (max-width:1100px){
@@ -284,23 +284,23 @@ html{scroll-padding-top:136px}
 
 /* 넓은 데스크톱: 로고·전화 확대 (셸 헤더 높이와 맞춤) */
 @media (min-width:1401px){
-  :root{--header-h:110px}
+  :root{--header-h:118px}
   .header-row{gap:24px}
   .brand{gap:14px;font-size:32px}
-  .brand-logo{width:72px;height:72px}
-  .brand small{font-size:18px;font-weight:700;letter-spacing:.02em;margin:0 0 0 12px;text-align:left}
+  .brand-logo{width:96px;height:96px}
+  .brand small{font-size:15px;font-weight:700;letter-spacing:.02em;margin:0 0 0 12px;text-align:left}
   .nav{font-size:15.5px;gap:22px}
   .tel a{font-size:24px}
 }
 @media (min-width:1500px){
-  :root{--header-h:126px}
+  :root{--header-h:132px}
   .brand{gap:16px;font-size:40px}
-  .brand-logo{width:90px;height:90px}
-  .brand small{font-size:20px;font-weight:700;margin:0 0 0 14px;text-align:left}
+  .brand-logo{width:110px;height:110px}
+  .brand small{font-size:16px;font-weight:700;margin:0 0 0 14px;text-align:left}
   .nav{font-size:17px;gap:28px}
   .tel a{font-size:28px}
 }
-.brand-logo{border-radius:50%;display:block;flex:none;box-shadow:0 0 0 1px var(--line);width:52px;height:52px}
+.brand-logo{border-radius:50%;display:block;flex:none;box-shadow:0 0 0 1px var(--line);width:72px;height:72px}
 
 /* 회사소개 */
 .about-head{text-align:center}.about-head .wrap{display:block}

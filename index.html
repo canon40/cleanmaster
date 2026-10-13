@@ -1,241 +1,378 @@
 <!doctype html>
-<html lang="ko" data-theme="dark">
+<html lang="ko" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>크린마스터 | 청소 전문업체 - 바닥왁스코팅 · 오피스크리닝 · 석재관리 · 에어컨청소</title>
-<meta name="description" content="청소전문가 크린마스터. 바닥왁스코팅, 오피스크리닝, 석재관리, 카펫크리닝, 에어컨 청소. 상담전화 010-8806-8664">
-<meta property="og:title" content="크린마스터 | 세상 모든 청소">
-<meta property="og:description" content="바닥왁스코팅 · 오피스크리닝 · 석재관리 · 카펫크리닝 · 에어컨청소 전문. 010-8806-8664">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#14181f">
+<title>크린마스터 | FLOOR LAB - 바닥 복원 · 청소 전문</title>
+<meta name="description" content="FLOOR LAB 크린마스터. 바닥 청소·코팅, 석재 연마·광택, 사무실 청소, 에어컨 분해 청소. 상담전화 010-8806-8664">
+<meta name="theme-color" content="#eef2f4">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="styles.css">
+<script>
+try {
+  var t = localStorage.getItem("fl-theme");
+  if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+} catch (e) {}
+</script>
 </head>
-<body class="is-home" data-panel="home">
+<body>
 <a class="skip" href="#main">본문으로 건너뛰기</a>
 
 <header class="site-header" id="top">
   <div class="wrap header-row">
-    <a class="brand" href="index.html" data-panel="home" aria-label="크린마스터 홈"><img class="brand-logo" src="logo.png" width="148" height="148" alt="FLOOR LAB 크린마스터 로고"><span>FLOOR LAB<small>바닥복원<br>전문기업</small></span>
+    <a class="brand" href="index.html" aria-label="FLOOR LAB 크린마스터 홈">
+      <img class="brand-logo" src="logo.png" width="120" height="120" alt="FLOOR LAB 크린마스터 로고">
+      <span>FLOOR LAB<small>바닥복원 전문기업</small></span>
     </a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="메뉴 열기">
+      <span></span><span></span><span></span>
+    </button>
     <nav id="nav" class="nav" aria-label="주 메뉴">
       <a href="about.html">회사소개</a>
       <a href="#services">복원서비스</a>
       <a href="#process">진행 절차</a>
-      <a href="reviews.html">시공사례</a>
+      <a href="#reviews">시공사례</a>
       <a href="#contact">견적 문의</a>
-      <a class="nav-blog" href="community.html">업체 블로그</a>
+      <a class="nav-blog" href="blog.html">작업 블로그</a>
     </nav>
     <div class="header-side">
-      <button class="theme-toggle" type="button" aria-label="밝은 화면으로 전환" title="화면 밝기 전환">
-        <svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.900l2.1 2.100M17 17l2.1 2.100M4.9 19.100L7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.500A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.500z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <button class="theme-toggle" type="button" aria-label="눈 편한 다크 모드로 전환" title="화면 모드 전환">
+        <svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
       </button>
       <div class="tel"><small>상담전화</small><a href="tel:01088068664">010-8806-8664</a></div>
     </div>
   </div>
-  <nav class="side-nav" aria-label="서비스 분야">
-  <p class="side-nav-title">서비스 분야</p>
-  <div class="side-acc">
-    <details class="side-group" open>
-      <summary>바닥 복원·관리</summary>
-      <ul>
-        <li><a href="floor-wax.html">바닥 청소·코팅</a></li>
-        <li><a href="stone.html">석재 연마·광택</a></li>
-        <li><a href="concrete.html">콘크리트 연마·폴리싱</a></li>
-        <li><a href="removal.html">오염·접착제 제거</a></li>
-        <li><a href="stone.html">계단·상판 복원</a></li>
-      </ul>
-    </details>
-    <details class="side-group">
-      <summary>공간·설비 청소</summary>
-      <ul>
-        <li><a href="office.html">사무실·상업공간 청소</a></li>
-        <li><a href="carpet.html">카펫·의자 청소</a></li>
-        <li><a href="aircon.html">에어컨 분해 청소</a></li>
-      </ul>
-    </details>
-    <details class="side-group">
-      <summary>특수 청소·시공</summary>
-      <ul>
-        <li><a href="exterior.html">외벽 청소</a></li>
-        <li><a href="fire.html">화재 청소</a></li>
-        <li><a href="grout.html">줄눈 시공</a></li>
-      </ul>
-    </details>
-  </div>
-  <div class="side-nav-foot">
-    <a href="reviews.html">전체 시공사례 →</a>
-    <a href="community.html">참여업체 보기 →</a>
-  </div>
-</nav>
 </header>
 
 <main id="main">
-<section class="promise">
-  <ul class="wrap">
-    <li>
-      <div class="promise-ico" aria-hidden="true">
-        <svg viewBox="0 0 64 64" fill="none"><rect x="10" y="8" width="34" height="44" rx="4" stroke="currentColor" stroke-width="2"/><path d="M18 20h18M18 28h14M18 36h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="42" cy="42" r="12" stroke="currentColor" stroke-width="2"/><path d="M47 47l7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  <!-- 약속 3가지 -->
+  <section class="promise" id="promise">
+    <ul class="wrap">
+      <li>
+        <div class="promise-ico" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none"><rect x="10" y="8" width="34" height="44" rx="4" stroke="currentColor" stroke-width="2"/><path d="M18 20h18M18 28h14M18 36h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="42" cy="42" r="12" stroke="currentColor" stroke-width="2"/><path d="M47 47l7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="promise-body"><b>01</b><span>현장 확인 후 견적</span><p>공간 상태를 먼저 확인하고 필요한 작업만 안내합니다.</p></div>
+      </li>
+      <li>
+        <div class="promise-ico" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none"><path d="M14 40c0-8 6-16 18-16s18 8 18 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="32" cy="40" r="10" stroke="currentColor" stroke-width="2"/><path d="M32 18v6M22 22l4 4M42 22l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 50h40" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="promise-body"><b>02</b><span>재질에 맞는 시공</span><p>바닥재와 석재 종류에 맞는 약품과 장비를 사용합니다.</p></div>
+      </li>
+      <li>
+        <div class="promise-ico" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none"><path d="M32 8l20 8v14c0 14-8 24-20 28C20 54 12 44 12 30V16l20-8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M22 32l7 7 13-14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="promise-body"><b>03</b><span>보험 가입 업체</span><p>배상책임보험에 가입되어 있어 안심하고 맡기실 수 있습니다.</p></div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 히어로 -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">청소 전문업체 크린마스터 · 빌딩 · 사무실 · 상가</p>
+        <h1>청소부터 복원까지,<br><strong>바닥의 가치를 찾습니다</strong></h1>
+        <p class="lead">바닥왁스코팅, 석재 연마 광택, 카펫 세척, 에어컨 분해 청소, 사무실 정기 청소를 직접 시공합니다. 청소대행사 인증업체이며 배상책임보험에 가입되어 있습니다.</p>
+        <div class="cta">
+          <a class="btn kakao" href="sms:01088068664?&body=%5B%ED%81%AC%EB%A6%B0%EB%A7%88%EC%8A%A4%ED%84%B0%20%EA%B2%AC%EC%A0%81%EB%AC%B8%EC%9D%98%5D%0A%EC%B2%AD%EC%86%8C%20%EC%A2%85%EB%A5%98%3A%20%0A%EC%A7%80%EC%97%AD%3A%20%0A%EB%A9%B4%EC%A0%81%28%ED%8F%89%29%3A%20%0A%ED%9D%AC%EB%A7%9D%20%EB%82%A0%EC%A7%9C%3A%20">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.2 4.7 6.6l-1 3.7c-.1.3.3.6.6.4l4.4-2.9c.4 0 .9.1 1.3.1 5.5 0 10-3.5 10-7.8S17.5 3 12 3z"/></svg>
+            카카오톡 · 문자 문의
+          </a>
+          <a class="btn ghost" href="tel:01088068664">전화 상담</a>
+        </div>
       </div>
-      <div class="promise-body"><b>01</b><span>현장 확인 후 견적</span><p>공간 상태를 먼저 확인하고 필요한 작업만 안내합니다.</p></div>
-    </li>
-    <li>
-      <div class="promise-ico" aria-hidden="true">
-        <svg viewBox="0 0 64 64" fill="none"><path d="M14 40c0-8 6-16 18-16s18 8 18 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="32" cy="40" r="10" stroke="currentColor" stroke-width="2"/><path d="M32 18v6M22 22l4 4M42 22l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 50h40" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="hero-photos" aria-label="크린마스터 작업 사진">
+        <figure><img src="img/main/m02.jpg" width="286" height="265" alt="바닥 연마 광택 작업"></figure>
+        <figure><img src="img/main/m03.jpg" width="286" height="265" alt="천장형 에어컨 분해 청소"></figure>
+        <figure><img src="img/main/m04.jpg" width="286" height="265" alt="영화관 카펫 청소 작업"></figure>
+        <figure><img src="img/main/m06.jpg" width="286" height="265" alt="특수 청소를 마친 강당 바닥"></figure>
       </div>
-      <div class="promise-body"><b>02</b><span>재질에 맞는 시공</span><p>바닥재와 석재 종류에 맞는 약품과 장비를 사용합니다.</p></div>
-    </li>
-    <li>
-      <div class="promise-ico" aria-hidden="true">
-        <svg viewBox="0 0 64 64" fill="none"><path d="M32 8l20 8v14c0 14-8 24-20 28C20 54 12 44 12 30V16l20-8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M22 32l7 7 13-14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </section>
+
+  <!-- 서비스 메뉴: PC 가로형 / 모바일 세로형 -->
+  <section id="services" class="section services">
+    <div class="wrap">
+      <header class="svc-head">
+        <p class="svc-brand">FLOOR LAB</p>
+        <p class="svc-sub desktop-only">서비스 메뉴 · 가로형</p>
+        <p class="svc-sub mobile-only">서비스 메뉴 · 세로형</p>
+      </header>
+
+      <div class="svc-menu" role="navigation" aria-label="서비스 메뉴">
+
+        <!-- 01 바닥 복원·관리 -->
+        <section class="svc-col" data-col="01">
+          <header class="svc-col-head">
+            <span class="svc-num" aria-hidden="true">01</span>
+            <span class="svc-ico svc-ico-lg" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none"><rect x="10" y="14" width="22" height="22" rx="2" stroke="currentColor" stroke-width="2"/><rect x="16" y="10" width="22" height="22" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 22h14M22 16v14" stroke="currentColor" stroke-width="1.6"/></svg>
+            </span>
+            <h2 class="svc-col-title">바닥 복원·관리</h2>
+          </header>
+          <ul class="svc-list">
+            <li class="svc-item">
+              <a class="svc-item-row" href="blog.html?cat=floor-wax">
+                <span class="svc-ico" aria-hidden="true">
+                  <svg viewBox="0 0 40 40" fill="none"><path d="M8 28h18l6-10H18L8 28z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 28v4M22 28v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M10 20h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                </span>
+                <div>
+                  <strong class="svc-item-main">바닥 청소 · 코팅</strong>
+                  <ul class="svc-subs">
+                    <li>데코타일 · 디럭스타일</li>
+                    <li>포세린타일</li>
+                    <li>왁스 박리</li>
+                    <li>왁스 · 나노코팅</li>
+                  </ul>
+                </div>
+              </a>
+            </li>
+            <li class="svc-item">
+              <a class="svc-item-row" href="blog.html?cat=stone">
+                <span class="svc-ico" aria-hidden="true">
+                  <svg viewBox="0 0 40 40" fill="none"><path d="M20 6l10 8-4 16H14L10 14l10-8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 18l6 4 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                </span>
+                <div>
+                  <strong class="svc-item-main">석재 연마 · 광택</strong>
+                  <ul class="svc-subs">
+                    <li>대리석</li>
+                    <li>화강석</li>
+                    <li>도끼다시 · 테라조</li>
+                  </ul>
+                </div>
+              </a>
+            </li>
+            <li class="svc-item">
+              <a class="svc-item-row" href="blog.html?cat=concrete">
+                <span class="svc-ico" aria-hidden="true">
+                  <svg viewBox="0 0 40 40" fill="none"><rect x="8" y="12" width="24" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 20h24M16 12v16M24 12v16" stroke="currentColor" stroke-width="1.4"/></svg>
+                </span>
+                <div>
+                  <strong class="svc-item-main">콘크리트 연마 · 폴리싱</strong>
+                </div>
+              </a>
+            </li>
+            <li class="svc-item">
+              <a class="svc-item-row" href="blog.html?cat=removal">
+                <span class="svc-ico" aria-hidden="true">
+                  <svg viewBox="0 0 40 40" fill="none"><circle cx="14" cy="16" r="5" stroke="currentColor" stroke-width="1.6"/><circle cx="24" cy="14" r="3.5" stroke="currentColor" stroke-width="1.6"/><circle cx="28" cy="22" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M10 28c4-6 10-8 18-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                </span>
+                <div>
+                  <strong class="svc-item-main">오염 · 접착제 제거</strong>
+                  <ul class="svc-subs">
+                    <li>의자바퀴자국</li>
+                    <li>본드</li>
+                    <li>실리콘</li>
+                    <li>스티커 잔여물</li>
+                  </ul>
+                </div>
+              </a>
+            </li>
+            <li class="svc-item">
+              <a class="svc-item-row" href="blog.html?cat=stairs">
+                <span class="svc-ico" aria-hidden="true">
+                  <svg viewBox="0 0 40 40" fill="none"><path d="M8 30h24M8 30V22h8v8M16 30V16h8v14M24 30V10h8v20" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                </span>
+                <div>
+                  <strong class="svc-item-main">계단 · 상판 복원</strong>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <!-- 02 공간·설비 청소 -->
+        <section class="svc-col" data-col="02">
+          <header class="svc-col-head">
+            <span class="svc-num" aria-hidden="true">02</span>
+            <span class="svc-ico svc-ico-lg" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none"><rect x="18" y="10" width="14" height="26" rx="2" stroke="currentColor" stroke-width="2"/><path d="M18 20h14M25 36v4M20 40h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="25" cy="15" r="2" fill="currentColor"/></svg>
+            </span>
+            <h2 class="svc-col-title">공간·설비 청소</h2>
+          </header>
+          <ul class="svc-list">
+            <li class="svc-item">
+              <a class="svc-item-row" href="blog.html?cat=office">
+                <span class="svc-ico" aria-hidden="true">
+                  <svg viewBox="0 0 40 40" fill="none"><path d="M8 30V14l8-6 8 6v16" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M24 18h8v12H24" stroke="currentColor" stroke-width="1.8"/><path d="M12 18h4M12 23h4M12 28h4M28 22v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </span>
+                <div><strong class="svc-item-main">사무실 · 상업공간 청소</strong></div>
+              </a>
+            </li>
+            <li class="svc-item">
+              <a class="svc-item-row" href="blog.html?cat=carpet">
+                <span class="svc-ico" aria-hidden="true">
+                  <svg viewBox="0 0 40 40" fill="none"><path d="M8 28c0-8 6-14 14-14s10 4 10 10c0 8-4 12-12 12H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M14 20h8M16 24h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </span>
+                <div><strong class="svc-item-main">카펫 · 의자 청소</strong></div>
+              </a>
+            </li>
+            <li class="svc-item">
+              <a class="svc-item-row" href="blog.html?cat=aircon">
+                <span class="svc-ico" aria-hidden="true">
+                  <svg viewBox="0 0 40 40" fill="none"><rect x="8" y="10" width="24" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M12 22v4M20 22v6M28 22v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M14 16h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </span>
+                <div><strong class="svc-item-main">에어컨 분해 청소</strong></div>
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <!-- 03 특수 청소·시공 -->
+        <section class="svc-col" data-col="03">
+          <header class="svc-col-head">
+            <span class="svc-num" aria-hidden="true">03</span>
+            <span class="svc-ico svc-ico-lg" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="8" stroke="currentColor" stroke-width="2"/><path d="M24 8v4M24 36v4M8 24h4M36 24h4M12.5 12.5l2.8 2.8M32.7 32.7l2.8 2.8M12.5 35.5l2.8-2.8M32.7 15.3l2.8-2.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </span>
+            <h2 class="svc-col-title">특수 청소·시공</h2>
+          </header>
+          <ul class="svc-list">
+            <li class="svc-item">
+              <a class="svc-item-row" href="blog.html?cat=exterior">
+                <span class="svc-ico" aria-hidden="true">
+                  <svg viewBox="0 0 40 40" fill="none"><path d="M10 32V12l6-4 6 4v20" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M22 16h8v16h-8" stroke="currentColor" stroke-width="1.8"/><path d="M14 18h4M14 24h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </span>
+                <div><strong class="svc-item-main">외벽 청소</strong></div>
+              </a>
+            </li>
+            <li class="svc-item">
+              <a class="svc-item-row" href="blog.html?cat=fire">
+                <span class="svc-ico" aria-hidden="true">
+                  <svg viewBox="0 0 40 40" fill="none"><path d="M20 8c4 6 8 8 8 14a8 8 0 1 1-16 0c0-6 4-8 8-14z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M18 26c0 2 1.5 4 2 4s2-2 2-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </span>
+                <div><strong class="svc-item-main">화재 청소</strong></div>
+              </a>
+            </li>
+            <li class="svc-item">
+              <a class="svc-item-row" href="blog.html?cat=grout">
+                <span class="svc-ico" aria-hidden="true">
+                  <svg viewBox="0 0 40 40" fill="none"><rect x="8" y="8" width="24" height="24" rx="1" stroke="currentColor" stroke-width="1.8"/><path d="M8 16h24M8 24h24M16 8v24M24 8v24" stroke="currentColor" stroke-width="1.4"/></svg>
+                </span>
+                <div><strong class="svc-item-main">줄눈 시공</strong></div>
+              </a>
+            </li>
+          </ul>
+        </section>
       </div>
-      <div class="promise-body"><b>03</b><span>보험 가입 업체</span><p>배상책임보험에 가입되어 있어 안심하고 맡기실 수 있습니다.</p></div>
-    </li>
-  </ul>
-</section>
-
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <p class="eyebrow">청소 전문업체 크린마스터 · 빌딩 · 사무실 · 상가</p>
-      <h1>청소부터 복원까지,<br><strong>바닥의 가치를 찾습니다</strong></h1>
-      <p class="lead">바닥왁스코팅, 석재 연마 광택, 카펫 세척, 에어컨 분해 청소, 사무실 정기 청소를 직접 시공합니다. 청소대행사 인증업체이며 배상책임보험에 가입되어 있습니다.</p>
-      <div class="cta"><a class="btn kakao" data-kakao href="#contact"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.2 4.7 6.600l-1 3.700c-.1.3.3.6.6.400l4.4-2.900c.4 0 .9.1 1.3.100 5.5 0 10-3.5 10-7.800S17.5 3 12 3z"/></svg>카카오톡 문의</a><a class="btn ghost" href="sms:01088068664?&body=%5B%ED%81%AC%EB%A6%B0%EB%A7%88%EC%8A%A4%ED%84%B0%20%EA%B2%AC%EC%A0%81%EB%AC%B8%EC%9D%98%5D%0A%EC%B2%AD%EC%86%8C%20%EC%A2%85%EB%A5%98%3A%20%0A%EC%A7%80%EC%97%AD%3A%20%0A%EB%A9%B4%EC%A0%81%28%ED%8F%89%29%3A%20%0A%ED%9D%AC%EB%A7%9D%20%EB%82%A0%EC%A7%9C%3A%20">문자로 문의</a></div>
     </div>
-    <div class="hero-photos" aria-label="크린마스터 작업 사진">
-      <a href="stone.html"><img src="img/main/m02.jpg" width="286" height="265" alt="바닥 연마 광택 작업"></a>
-      <a href="aircon.html"><img src="img/main/m03.jpg" width="286" height="265" alt="천장형 에어컨 분해 청소"></a>
-      <a href="carpet.html"><img src="img/main/m04.jpg" width="286" height="265" alt="영화관 카펫 청소 작업"></a>
-      <a href="removal.html"><img src="img/main/m06.jpg" width="286" height="265" alt="특수 청소를 마친 강당 바닥"></a>
+  </section>
+
+  <!-- 진행 절차 -->
+  <section id="process" class="section alt">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="eyebrow">PROCESS</p>
+        <h2>진행 절차</h2>
+      </header>
+      <ol class="steps">
+        <li>
+          <div class="step-img" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M14 10h20a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4H24l-8 7v-7h-2a4 4 0 0 1-4-4V14a4 4 0 0 1 4-4z"/><path d="M18 18h12M18 23h8"/></svg>
+          </div>
+          <b>STEP 01</b>
+          <h3>상담</h3>
+          <p>카카오톡이나 문자로 공간과 원하시는 작업을 알려 주세요.</p>
+        </li>
+        <li>
+          <div class="step-img" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><rect x="12" y="8" width="24" height="32" rx="3"/><path d="M18 8v-2h12v2M18 18h12M18 24h12M18 30h7"/><circle cx="33" cy="33" r="6" fill="var(--card)"/><path d="M37.5 37.5L42 42"/></svg>
+          </div>
+          <b>STEP 02</b>
+          <h3>현장 확인 · 견적</h3>
+          <p>현장 상태를 확인하고 작업 범위와 견적을 안내합니다.</p>
+        </li>
+        <li>
+          <div class="step-img" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><circle cx="24" cy="34" r="9"/><circle cx="24" cy="34" r="3"/><path d="M24 25V12M24 12l10-6M18 12h12"/></svg>
+          </div>
+          <b>STEP 03</b>
+          <h3>시공</h3>
+          <p>약속한 일정에 맞춰 전용 장비로 작업을 진행합니다.</p>
+        </li>
+        <li>
+          <div class="step-img" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M24 6l4.5 9.5L39 17l-7.5 7.3L33.3 35 24 30l-9.3 5 1.8-10.7L9 17l10.5-1.5z"/><path d="M38 6v6M35 9h6M9 34v6M6 37h6"/></svg>
+          </div>
+          <b>STEP 04</b>
+          <h3>확인 · 마무리</h3>
+          <p>함께 결과를 확인하고 마무리합니다.</p>
+        </li>
+      </ol>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="services" class="section">
-  <div class="wrap">
-    <header class="section-head svc-menu-head">
-      <p class="eyebrow">SERVICES</p>
-      <h2>FLOOR LAB</h2>
-      <p class="svc-menu-sub">서비스 메뉴</p>
-    </header>
-    <div class="svc-menu" role="navigation" aria-label="서비스 메뉴">
-      <section class="svc-col" data-col="01">
-        <header class="svc-col-head">
-          <span class="svc-col-num" aria-hidden="true">01</span>
-          <h3>바닥 복원·관리</h3>
-        </header>
-        <ul class="svc-list">
-          <li class="svc-item">
-            <a class="svc-item-main" href="floor-wax.html"><strong>바닥 청소·코팅</strong></a>
-            <ul class="svc-subs"><li><a href="floor-wax.html">데코타일·디럭스타일</a></li><li><a href="porcelain.html">포세린타일</a></li><li><a href="floor-wax.html">왁스 박리</a></li><li><a href="porcelain.html">왁스·나노코팅</a></li></ul>
-          </li>
-          <li class="svc-item">
-            <a class="svc-item-main" href="stone.html"><strong>석재 연마·광택</strong></a>
-            <ul class="svc-subs"><li><a href="stone.html">대리석</a></li><li><a href="stone.html">화강석</a></li><li><a href="stone.html">도끼다시·테라조</a></li></ul>
-          </li>
-          <li class="svc-item">
-            <a class="svc-item-main" href="concrete.html"><strong>콘크리트 연마·폴리싱</strong></a>
-            
-          </li>
-          <li class="svc-item">
-            <a class="svc-item-main" href="removal.html"><strong>오염·접착제 제거</strong></a>
-            <ul class="svc-subs"><li><a href="removal.html">의자바퀴자국</a></li><li><a href="removal.html">본드</a></li><li><a href="removal.html">실리콘</a></li><li><a href="removal.html">스티커 잔여물</a></li></ul>
-          </li>
-          <li class="svc-item">
-            <a class="svc-item-main" href="stone.html"><strong>계단·상판 복원</strong></a>
-            
-          </li>
-        </ul>
-      </section>
-      <section class="svc-col" data-col="02">
-        <header class="svc-col-head">
-          <span class="svc-col-num" aria-hidden="true">02</span>
-          <h3>공간·설비 청소</h3>
-        </header>
-        <ul class="svc-list">
-          <li class="svc-item">
-            <a class="svc-item-main" href="office.html"><strong>사무실·상업공간 청소</strong></a>
-            
-          </li>
-          <li class="svc-item">
-            <a class="svc-item-main" href="carpet.html"><strong>카펫·의자 청소</strong></a>
-            
-          </li>
-          <li class="svc-item">
-            <a class="svc-item-main" href="aircon.html"><strong>에어컨 분해 청소</strong></a>
-            
-          </li>
-        </ul>
-      </section>
-      <section class="svc-col" data-col="03">
-        <header class="svc-col-head">
-          <span class="svc-col-num" aria-hidden="true">03</span>
-          <h3>특수 청소·시공</h3>
-        </header>
-        <ul class="svc-list">
-          <li class="svc-item">
-            <a class="svc-item-main" href="exterior.html"><strong>외벽 청소</strong></a>
-            
-          </li>
-          <li class="svc-item">
-            <a class="svc-item-main" href="fire.html"><strong>화재 청소</strong></a>
-            
-          </li>
-          <li class="svc-item">
-            <a class="svc-item-main" href="grout.html"><strong>줄눈 시공</strong></a>
-            
-          </li>
-        </ul>
-      </section>
+  <!-- 시공사례 -->
+  <section id="reviews" class="section">
+    <div class="wrap">
+      <header class="section-head row">
+        <div>
+          <p class="eyebrow">REVIEWS</p>
+          <h2>시공사례</h2>
+          <p>크린마스터가 직접 작업한 현장 기록입니다.</p>
+        </div>
+        <div class="cta" style="margin:0">
+          <a class="btn primary" href="blog.html">작업 블로그 전체 보기</a>
+          <a class="btn ghost" href="https://blog.naver.com/jangsang40" target="_blank" rel="noopener">네이버 블로그</a>
+        </div>
+      </header>
+      <div class="works">
+        <article class="work">
+          <div class="work-img"><img src="works/060.jpg" width="600" height="600" loading="lazy" alt="데코타일 청소"></div>
+          <div class="work-body"><span class="tag">데코타일 청소·코팅</span><h3>데코타일 청소</h3><time>2026.03.25</time></div>
+        </article>
+        <article class="work">
+          <div class="work-img"><img src="works/193.jpg" width="600" height="600" loading="lazy" alt="데코타일 본드 제거"></div>
+          <div class="work-body"><span class="tag">바닥 오염·접착제 제거</span><h3>용산 식당 오픈 전 데코타일 본드 제거</h3><time>2025.11.03</time></div>
+        </article>
+        <article class="work">
+          <div class="work-img"><img src="works/114.jpg" width="600" height="600" loading="lazy" alt="디럭스타일 왁스 코팅"></div>
+          <div class="work-body"><span class="tag">데코타일 청소·코팅</span><h3>관악구청 사무실 디럭스타일 왁스박리 후 코팅</h3><time>2025.11.03</time></div>
+        </article>
+        <article class="work">
+          <div class="work-img"><img src="works/112.jpg" width="600" height="600" loading="lazy" alt="원목마루 기름때 제거"></div>
+          <div class="work-body"><span class="tag">바닥 오염·접착제 제거</span><h3>원목마루 기름때 제거 전 후</h3><time>2025.03.18</time></div>
+        </article>
+        <article class="work">
+          <div class="work-img"><img src="works/113.jpg" width="600" height="600" loading="lazy" alt="식당 원목 기름때 제거"></div>
+          <div class="work-body"><span class="tag">바닥 오염·접착제 제거</span><h3>압구정동 식당 원목 기름때 제거</h3><time>2024.12.12</time></div>
+        </article>
+        <article class="work">
+          <div class="work-img"><img src="works/197.jpg" width="600" height="600" loading="lazy" alt="대리석 광택 복원"></div>
+          <div class="work-body"><span class="tag">석재 연마·광택</span><h3>오염심한 대리석 광택 복원</h3><time>2024.12.09</time></div>
+        </article>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="process" class="section alt">
-  <div class="wrap">
-    <header class="section-head"><p class="eyebrow">PROCESS</p><h2>진행 절차</h2></header>
-    <ol class="steps">
-      <li><div class="step-img"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 10h20a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4H24l-8 7v-7h-2a4 4 0 0 1-4-4V14a4 4 0 0 1 4-4z"/><path d="M18 18h12M18 23h8"/></svg></div><b>STEP 01</b><h3>상담</h3><p>카카오톡이나 문자로 공간과 원하시는 작업을 알려 주세요.</p></li>
-      <li><div class="step-img"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="12" y="8" width="24" height="32" rx="3"/><path d="M18 8v-2h12v2M18 18h12M18 24h12M18 30h7"/><circle cx="33" cy="33" r="6" fill="var(--card)"/><path d="M37.5 37.5L42 42"/></svg></div><b>STEP 02</b><h3>현장 확인 · 견적</h3><p>현장 상태를 확인하고 작업 범위와 견적을 안내합니다.</p></li>
-      <li><div class="step-img"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="34" r="9"/><circle cx="24" cy="34" r="3"/><path d="M24 25V12M24 12l10-6M18 12h12"/></svg></div><b>STEP 03</b><h3>시공</h3><p>약속한 일정에 맞춰 전용 장비로 작업을 진행합니다.</p></li>
-      <li><div class="step-img"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6l4.5 9.5L39 17l-7.5 7.3L33.3 35 24 30l-9.3 5 1.8-10.7L9 17l10.5-1.5z"/><path d="M38 6v6M35 9h6M9 34v6M6 37h6"/></svg></div><b>STEP 04</b><h3>확인 · 마무리</h3><p>함께 결과를 확인하고 마무리합니다.</p></li>
-    </ol>
-  </div>
-</section>
-
-<section id="blog" class="section">
-  <div class="wrap">
-    <header class="section-head row">
-      <div><p class="eyebrow">REVIEWS</p><h2>시공사례</h2><p>크린마스터가 직접 작업한 현장 기록 110건을 볼 수 있습니다.</p></div>
-      <div class="cta" style="margin:0"><a class="btn primary" href="reviews.html">시공 후기 전체 보기</a><a class="btn ghost" href="https://blog.naver.com/jangsang40" target="_blank" rel="noopener">네이버 블로그</a></div>
-    </header>
-    <div class="works"><a class="work" data-cat="deco" href="reviews/5529.html"><div class="work-img"><img src="works/060.jpg" width="600" height="600" loading="lazy" alt=""></div><div class="work-body"><span class="tag">데코타일 청소·코팅</span><h3>데코타일 청소</h3><time>2026.03.25</time></div></a><a class="work" data-cat="removal" href="reviews/5527.html"><div class="work-img"><img src="works/193.jpg" width="859" height="664" loading="lazy" alt=""></div><div class="work-body"><span class="tag">바닥 오염·접착제 제거</span><h3>용산 식당 오픈 전 데코타일본드제거 와 도끼다시연마</h3><time>2025.11.03</time></div></a><a class="work" data-cat="deco" href="reviews/5526.html"><div class="work-img"><img src="works/114.jpg" width="1100" height="826" loading="lazy" alt=""></div><div class="work-body"><span class="tag">데코타일 청소·코팅</span><h3>관악구청 사무실 디럭스타일 왁스박리 후 코팅</h3><time>2025.11.03</time></div></a><a class="work" data-cat="removal" href="reviews/5525.html"><div class="work-img"><img src="works/112.jpg" width="789" height="593" loading="lazy" alt=""></div><div class="work-body"><span class="tag">바닥 오염·접착제 제거</span><h3>원목마루 기름때 제거 전 후</h3><time>2025.03.18</time></div></a><a class="work" data-cat="removal" href="reviews/5524.html"><div class="work-img"><img src="works/113.jpg" width="800" height="900" loading="lazy" alt=""></div><div class="work-body"><span class="tag">바닥 오염·접착제 제거</span><h3>압구정동 식당 원목 기름때 제거</h3><time>2024.12.12</time></div></a><a class="work" data-cat="stone" href="reviews/5523.html"><div class="work-img"><img src="works/197.jpg" width="1100" height="833" loading="lazy" alt=""></div><div class="work-body"><span class="tag">석재 연마·광택</span><h3>오염심한 대리석 광택 복원</h3><time>2024.12.09</time></div></a></div>
-  </div>
-</section>
-
-<section id="contact" class="section alt">
-  <div class="wrap contact">
-    <div>
-      <p class="eyebrow">CONTACT</p>
-      <h2>견적 문의</h2>
-      <p>카카오톡이나 문자로 편하게 문의해 주세요. 공간 사진을 함께 보내 주시면 상담이 더 빠릅니다.</p>
-      <div class="cta"><a class="btn kakao" data-kakao href="#contact"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.2 4.7 6.600l-1 3.700c-.1.3.3.6.6.400l4.4-2.900c.4 0 .9.1 1.3.100 5.5 0 10-3.5 10-7.800S17.5 3 12 3z"/></svg>카카오톡 문의</a><a class="btn ghost" href="sms:01088068664?&body=%5B%ED%81%AC%EB%A6%B0%EB%A7%88%EC%8A%A4%ED%84%B0%20%EA%B2%AC%EC%A0%81%EB%AC%B8%EC%9D%98%5D%0A%EC%B2%AD%EC%86%8C%20%EC%A2%85%EB%A5%98%3A%20%0A%EC%A7%80%EC%97%AD%3A%20%0A%EB%A9%B4%EC%A0%81%28%ED%8F%89%29%3A%20%0A%ED%9D%AC%EB%A7%9D%20%EB%82%A0%EC%A7%9C%3A%20">문자로 문의</a></div>
+  <!-- 견적 문의 -->
+  <section id="contact" class="section alt">
+    <div class="wrap contact">
+      <div>
+        <p class="eyebrow">CONTACT</p>
+        <h2>견적 문의</h2>
+        <p>카카오톡이나 문자로 편하게 문의해 주세요. 공간 사진을 함께 보내 주시면 상담이 더 빠릅니다.</p>
+        <div class="cta">
+          <a class="btn kakao" href="sms:01088068664?&body=%5B%ED%81%AC%EB%A6%B0%EB%A7%88%EC%8A%A4%ED%84%B0%20%EA%B2%AC%EC%A0%81%EB%AC%B8%EC%9D%98%5D%0A%EC%B2%AD%EC%86%8C%20%EC%A2%85%EB%A5%98%3A%20%0A%EC%A7%80%EC%97%AD%3A%20%0A%EB%A9%B4%EC%A0%81%28%ED%8F%89%29%3A%20%0A%ED%9D%AC%EB%A7%9D%20%EB%82%A0%EC%A7%9C%3A%20">문자로 문의</a>
+          <a class="btn ghost" href="tel:01088068664">010-8806-8664</a>
+        </div>
+      </div>
+      <dl class="info">
+        <div><dt>상호</dt><dd>크린마스터</dd></div>
+        <div><dt>주소</dt><dd>서울특별시 성북구 장월로11길 59-13, 101호</dd></div>
+        <div><dt>전화</dt><dd><a href="tel:01088068664">010-8806-8664</a></dd></div>
+        <div><dt>팩스</dt><dd>0504-261-8664</dd></div>
+        <div><dt>메일</dt><dd><a href="mailto:twri@naver.com">twri@naver.com</a></dd></div>
+        <div><dt>블로그</dt><dd><a href="https://blog.naver.com/jangsang40" target="_blank" rel="noopener">blog.naver.com/jangsang40</a></dd></div>
+      </dl>
     </div>
-    <dl class="info">
-      <div><dt>상호</dt><dd>크린마스터</dd></div>
-      <div><dt>주소</dt><dd>서울특별시 성북구 장월로11길 59-13, 101호</dd></div>
-      <div><dt>전화</dt><dd><a href="tel:01088068664">010-8806-8664</a></dd></div>
-      <div><dt>팩스</dt><dd>0504-261-8664</dd></div>
-      <div><dt>메일</dt><dd><a href="mailto:twri@naver.com">twri@naver.com</a></dd></div>
-      <div><dt>블로그</dt><dd><a href="https://blog.naver.com/jangsang40" target="_blank" rel="noopener">blog.naver.com/jangsang40</a></dd></div>
-    </dl>
-  </div>
-</section>
+  </section>
 </main>
 
 <footer class="site-footer">
@@ -246,7 +383,11 @@
   </div>
 </footer>
 
-<div class="call-fab"><a class="btn kakao" data-kakao href="#contact"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.2 4.7 6.600l-1 3.700c-.1.3.3.6.6.400l4.4-2.900c.4 0 .9.1 1.3.100 5.5 0 10-3.5 10-7.800S17.5 3 12 3z"/></svg>카카오톡 문의</a><a class="btn sms" href="sms:01088068664?&body=%5B%ED%81%AC%EB%A6%B0%EB%A7%88%EC%8A%A4%ED%84%B0%20%EA%B2%AC%EC%A0%81%EB%AC%B8%EC%9D%98%5D%0A%EC%B2%AD%EC%86%8C%20%EC%A2%85%EB%A5%98%3A%20%0A%EC%A7%80%EC%97%AD%3A%20%0A%EB%A9%B4%EC%A0%81%28%ED%8F%89%29%3A%20%0A%ED%9D%AC%EB%A7%9D%20%EB%82%A0%EC%A7%9C%3A%20">문자로 문의</a></div>
+<div class="call-fab">
+  <a class="btn kakao" href="sms:01088068664?&body=%5B%ED%81%AC%EB%A6%B0%EB%A7%88%EC%8A%A4%ED%84%B0%20%EA%B2%AC%EC%A0%81%EB%AC%B8%EC%9D%98%5D">문자 문의</a>
+  <a class="btn sms" href="tel:01088068664">전화 상담</a>
+</div>
+
 <script src="script.js" defer></script>
 </body>
 </html>

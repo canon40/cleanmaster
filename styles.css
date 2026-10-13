@@ -79,21 +79,23 @@ ul, ol { padding: 0; list-style: none; }
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
 }
-/* 바로가기 카테고리 (견적·블로그·회사소개·전화) */
+/* 바로가기: 견적 문의 · 작업 블로그 (한 줄) */
 .nav-quick-inline {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-left: 8px;
-  padding-left: 10px;
+  flex-wrap: nowrap;
+  flex: none;
+  gap: 8px;
+  margin-left: 10px;
+  padding-left: 12px;
   border-left: 1px solid var(--line);
+  white-space: nowrap;
 }
 .nav-quick-inline a {
   display: inline-flex;
   align-items: center;
   min-height: 34px;
-  padding: 0 12px !important;
+  padding: 0 14px !important;
   border: 1px solid var(--line) !important;
   border-radius: 999px !important;
   background: var(--card);
@@ -102,18 +104,28 @@ ul, ol { padding: 0; list-style: none; }
   font-weight: 700 !important;
   text-decoration: none;
   border-bottom: 1px solid var(--line) !important;
+  white-space: nowrap;
 }
 .nav-quick-inline a:hover {
   border-color: var(--accent) !important;
   color: var(--accent) !important;
   background: var(--accent-soft);
 }
-.nav-quick-inline .nav-tel,
-.nav-sub .nav-tel {
-  color: var(--accent) !important;
-  border-color: color-mix(in srgb, var(--accent) 45%, var(--line)) !important;
-}
 .nav-quick { display: none; }
+.nav > a.nav-link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--sub);
+  padding: 10px 10px;
+  border-bottom: 2px solid transparent;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav > a.nav-link:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
 .header-row {
   display: flex;
   align-items: center;

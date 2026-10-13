@@ -79,31 +79,41 @@ ul, ol { padding: 0; list-style: none; }
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
 }
-.util-bar {
-  border-bottom: 1px solid var(--line);
-  background: var(--bg2);
-  font-size: 13px;
-}
-.util-row {
-  min-height: 36px;
+/* 바로가기 카테고리 (견적·블로그·회사소개·전화) */
+.nav-quick-inline {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  color: var(--sub);
-}
-.util-row p { margin: 0; }
-.util-links {
-  display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 6px;
+  margin-left: 8px;
+  padding-left: 10px;
+  border-left: 1px solid var(--line);
 }
-.util-links a {
-  color: var(--sub);
+.nav-quick-inline a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 999px !important;
+  background: var(--card);
+  color: var(--text) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
   text-decoration: none;
-  font-weight: 600;
+  border-bottom: 1px solid var(--line) !important;
 }
-.util-links a:hover { color: var(--accent); }
+.nav-quick-inline a:hover {
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+  background: var(--accent-soft);
+}
+.nav-quick-inline .nav-tel,
+.nav-sub .nav-tel {
+  color: var(--accent) !important;
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line)) !important;
+}
+.nav-quick { display: none; }
 .header-row {
   display: flex;
   align-items: center;
@@ -825,7 +835,8 @@ a.svc-item-row:hover .svc-ico {
   .desktop-only { display: none; }
   .mobile-only { display: block; }
 
-  .util-row p { display: none; }
+  .nav-quick { display: block; width: 100%; }
+  .nav-quick-inline { display: none; }
   .nav-toggle { display: grid; place-items: center; order: 4; margin-left: 8px; }
   .header-side { order: 3; margin-left: auto; }
   .brand { order: 1; }

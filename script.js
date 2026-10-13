@@ -1,4 +1,12 @@
 (function () {
+  document.querySelectorAll('.side-acc').forEach(function (acc) {
+    acc.addEventListener('toggle', function (e) {
+      var t = e.target;
+      if (!t.classList || !t.classList.contains('side-group') || !t.open) return;
+      acc.querySelectorAll('.side-group').forEach(function (d) { if (d !== t) d.open = false; });
+    }, true);
+  });
+
   var root = document.documentElement;
   var btn = document.querySelector('.theme-toggle');
   function apply(t) {
@@ -27,7 +35,7 @@
   /* 노트북+: 카테고리 클릭 시 페이지를 옆으로 전환 */
   var deskMq = window.matchMedia('(min-width:1101px)');
   var main = document.getElementById('main');
-  var catbar = document.querySelector('.catbar');
+  var catbar = document.querySelector('.side-nav');
   var sliding = false;
 
   function catLinks() {
@@ -204,30 +212,70 @@
     else { a.hidden = true; }
   });
 
-  // 분류 필터 (시공 후기, 커뮤니티 공통)
+  // 분류 필터 (시공 후기, 업체 블로그 공통)
+  var activeCat = 'all';
+  var activeFirm = 'all';
+  function applyFilters() {
+    document.querySelectorAll('.work').forEach(function (w) {
+      var catOk = activeCat === 'all' || w.getAttribute('data-cat') === activeCat;
+      var firmOk = activeFirm === 'all' || w.getAttribute('data-firm') === activeFirm;
+      w.hidden = !(catOk && firmOk);
+    });
+  }
   function bindChips() {
-    var chips = document.querySelectorAll('.chip');
+    var chips = document.querySelectorAll('#blog-chips .chip, .chips:not(.firms) > .chip');
+    if (!document.getElementById('blog-chips')) chips = document.querySelectorAll('.chip');
     chips.forEach(function (c) {
       c.addEventListener('click', function () {
-        chips.forEach(function (x) { x.classList.toggle('on', x === c); });
-        var f = c.getAttribute('data-f');
-        document.querySelectorAll('.work').forEach(function (w) {
-          w.hidden = f !== 'all' && w.getAttribute('data-cat') !== f;
-        });
+        var bar = c.parentElement;
+        bar.querySelectorAll('.chip').forEach(function (x) { x.classList.toggle('on', x === c); });
+        activeCat = c.getAttribute('data-f') || 'all';
+        applyFilters();
       });
     });
-    // 주소 뒤 #분류 로 들어오면 해당 분류만 표시 (예: reviews.html#gall03)
     if (chips.length && location.hash) {
       var want = document.querySelector('.chip[data-f="' + decodeURIComponent(location.hash.slice(1)).replace(/["\\]/g, '') + '"]');
       if (want) want.click();
     }
   }
 
-  // 커뮤니티: 네이버 블로그 글 (blog.json 과 사진은 GitHub Actions 가 주기적으로 갱신)
+  // 업체 블로그: 회원가입 후에만 목록·검색 공개
+  var AUTH_USERS = 'fl-blog-users';
+  var AUTH_SES = 'fl-blog-session';
+  function normPhone(v) { return String(v || '').replace(/\D/g, ''); }
+  function hashPw(pw) {
+    var s = 'fl|' + String(pw || '');
+    var h = 2166136261;
+    for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return (h >>> 0).toString(16);
+  }
+  function readUsers() {
+    try { var a = JSON.parse(localStorage.getItem(AUTH_USERS) || '[]'); return Array.isArray(a) ? a : []; }
+    catch (e) { return []; }
+  }
+  function writeUsers(list) { try { localStorage.setItem(AUTH_USERS, JSON.stringify(list)); } catch (e) {} }
+  function readSession() {
+    try { return JSON.parse(localStorage.getItem(AUTH_SES) || 'null'); } catch (e) { return null; }
+  }
+  function writeSession(u) {
+    try {
+      if (u) localStorage.setItem(AUTH_SES, JSON.stringify({ phone: u.phone, company: u.company, name: u.name, at: Date.now() }));
+      else localStorage.removeItem(AUTH_SES);
+    } catch (e) {}
+  }
+  function isAuthed() {
+    var ses = readSession();
+    if (!ses || !ses.phone) return false;
+    return readUsers().some(function (u) { return u.phone === ses.phone; });
+  }
+
   var box = document.getElementById('posts');
-  if (!box) { bindChips(); }
-  else {
+  var gate = document.getElementById('member-gate');
+  var blogBody = document.getElementById('blog-body');
+  if (!box && !gate) { bindChips(); }
+  else if (box) {
   var BLOG = 'https://blog.naver.com/jangsang40';
+  var blogLoaded = false;
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; }
   function note(msg) {
     box.innerHTML = '';
@@ -235,32 +283,202 @@
     var a = el('a', '', '블로그에서 직접 보기'); a.href = BLOG; a.target = '_blank'; a.rel = 'noopener'; a.style.color = 'var(--accent)';
     p.appendChild(a); box.appendChild(p);
   }
-  fetch('blog.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
-    if (!d.posts || !d.posts.length) return note('아직 불러온 글이 없습니다.');
-    var counts = {}, order = [];
-    d.posts.forEach(function (p) { var c = p.cat || '소식'; if (!counts[c]) { counts[c] = 0; order.push(c); } counts[c]++; });
-    order.sort(function (x, y) { return counts[y] - counts[x]; });
-    var bar = document.getElementById('blog-chips');
-    if (bar) {
-      var all = el('button', 'chip on', '전체 ' + d.posts.length); all.type = 'button'; all.setAttribute('data-f', 'all'); bar.appendChild(all);
-      order.forEach(function (c) { var b = el('button', 'chip', c + ' ' + counts[c]); b.type = 'button'; b.setAttribute('data-f', c); bar.appendChild(b); });
+  function firmHay(m) {
+    return [m.name, m.brand, m.area, m.blog, m.desc, m.id].filter(Boolean).join(' ').toLowerCase();
+  }
+  function paintAuthBar() {
+    var bar = document.getElementById('auth-bar');
+    if (!bar) return;
+    var ses = readSession();
+    if (!ses) { bar.hidden = true; bar.textContent = ''; return; }
+    bar.hidden = false;
+    bar.textContent = (ses.company || ses.name || '회원') + '님으로 로그인됨';
+    var out = el('button', '', '로그아웃');
+    out.type = 'button';
+    out.addEventListener('click', function () { writeSession(null); refreshGate(); });
+    bar.appendChild(out);
+  }
+  function loadBlog() {
+    if (blogLoaded) return;
+    blogLoaded = true;
+    Promise.all([
+      fetch('members.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }),
+      fetch('blog.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); })
+    ]).then(function (res) {
+      var members = res[0] || [];
+      var d = res[1] || {};
+      if (!d.posts || !d.posts.length) return note('아직 불러온 글이 없습니다.');
+
+      var firms = document.getElementById('firms');
+      var qInput = document.getElementById('firm-q');
+      var firmButtons = [];
+
+      function paintFirms(query) {
+        if (!firms) return;
+        var q = (query || '').trim().toLowerCase();
+        firms.innerHTML = '';
+        firmButtons = [];
+        var allBtn = el('button', 'firm-card' + (activeFirm === 'all' ? ' on' : ''));
+        allBtn.type = 'button';
+        allBtn.setAttribute('data-firm', 'all');
+        allBtn.appendChild(el('strong', '', '전체 업체'));
+        allBtn.appendChild(el('span', '', members.length + '곳 · 글 ' + d.posts.length));
+        firms.appendChild(allBtn);
+        firmButtons.push(allBtn);
+
+        members.forEach(function (m) {
+          if (q && firmHay(m).indexOf(q) === -1) return;
+          var n = d.posts.filter(function (p) { return p.blog === m.blog || p.member === m.id; }).length;
+          var btn = el('button', 'firm-card' + (activeFirm === m.id ? ' on' : ''));
+          btn.type = 'button';
+          btn.setAttribute('data-firm', m.id);
+          var top = el('div', 'firm-card-top');
+          if (/^[a-z0-9_./-]+\.(png|jpg|webp)$/i.test(m.logo || '')) {
+            var lg = el('img', 'firm-logo'); lg.src = m.logo; lg.alt = ''; top.appendChild(lg);
+          }
+          var meta = el('div');
+          if (m.brand) meta.appendChild(el('small', '', m.brand));
+          meta.appendChild(el('strong', '', m.name));
+          top.appendChild(meta);
+          btn.appendChild(top);
+          if (m.area) btn.appendChild(el('span', 'firm-area', m.area));
+          btn.appendChild(el('span', '', '글 ' + n + ' · @' + m.blog));
+          firms.appendChild(btn);
+          firmButtons.push(btn);
+        });
+
+        if (firmButtons.length === 1 && q) {
+          firms.appendChild(el('p', 'muted', '검색 결과가 없습니다. 업체명·지역·블로그 ID로 다시 찾아 보세요.'));
+        }
+
+        firmButtons.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            activeFirm = btn.getAttribute('data-firm') || 'all';
+            firmButtons.forEach(function (x) { x.classList.toggle('on', x === btn); });
+            applyFilters();
+          });
+        });
+      }
+
+      if (qInput) {
+        var t;
+        qInput.addEventListener('input', function () {
+          clearTimeout(t);
+          t = setTimeout(function () { paintFirms(qInput.value); }, 120);
+        });
+      }
+      paintFirms('');
+
+      var visiblePosts = d.posts;
+      var counts = {}, order = [];
+      visiblePosts.forEach(function (p) { var c = p.cat || '소식'; if (!counts[c]) { counts[c] = 0; order.push(c); } counts[c]++; });
+      order.sort(function (x, y) { return counts[y] - counts[x]; });
+      var bar = document.getElementById('blog-chips');
+      if (bar) {
+        bar.innerHTML = '';
+        var all = el('button', 'chip on', '전체 ' + visiblePosts.length); all.type = 'button'; all.setAttribute('data-f', 'all'); bar.appendChild(all);
+        order.forEach(function (c) { var b = el('button', 'chip', c + ' ' + counts[c]); b.type = 'button'; b.setAttribute('data-f', c); bar.appendChild(b); });
+      }
+      box.innerHTML = '';
+      visiblePosts.forEach(function (post) {
+        var a = el('a', 'work');
+        a.href = /^\d{6,}$/.test(post.no || '') ? 'post.html?b=' + encodeURIComponent(post.blog || 'jangsang40') + '&no=' + post.no : BLOG;
+        a.setAttribute('data-cat', post.cat || '소식');
+        a.setAttribute('data-firm', post.member || '');
+        var pic = el('div', 'work-img');
+        if (post.img && /^blogimg\/\d+\.jpg$/.test(post.img)) { var im = el('img'); im.src = post.img; im.loading = 'lazy'; im.alt = ''; pic.appendChild(im); }
+        else pic.appendChild(el('span', 'noimg', '블로그'));
+        var body = el('div', 'work-body');
+        body.appendChild(el('span', 'tag', post.cat || '소식'));
+        body.appendChild(el('h3', '', post.title));
+        body.appendChild(el('time', '', post.date || ''));
+        a.appendChild(pic); a.appendChild(body); box.appendChild(a);
+      });
+      activeCat = 'all';
+      activeFirm = 'all';
+      bindChips();
+      applyFilters();
+    }).catch(function () { note('글을 불러오지 못했습니다.'); });
+  }
+  function refreshGate() {
+    var ok = isAuthed();
+    if (gate) gate.hidden = ok;
+    if (blogBody) blogBody.hidden = !ok;
+    paintAuthBar();
+    if (ok) loadBlog();
+    else {
+      blogLoaded = false;
+      if (box) box.innerHTML = '<p class="muted">로그인 후 글을 볼 수 있습니다.</p>';
+      var firms = document.getElementById('firms');
+      if (firms) firms.innerHTML = '';
+      var chips = document.getElementById('blog-chips');
+      if (chips) chips.innerHTML = '';
     }
-    box.innerHTML = '';
-    d.posts.forEach(function (post) {
-      var a = el('a', 'work');
-      a.href = /^\d{6,}$/.test(post.no || '') ? 'post.html?b=' + encodeURIComponent(post.blog || 'jangsang40') + '&no=' + post.no : BLOG;
-      a.setAttribute('data-cat', post.cat || '소식');
-      var pic = el('div', 'work-img');
-      if (post.img && /^blogimg\/\d+\.jpg$/.test(post.img)) { var im = el('img'); im.src = post.img; im.loading = 'lazy'; im.alt = ''; pic.appendChild(im); }
-      else pic.appendChild(el('span', 'noimg', '블로그'));
-      var body = el('div', 'work-body');
-      body.appendChild(el('span', 'tag', post.cat || '소식'));
-      body.appendChild(el('h3', '', post.title));
-      body.appendChild(el('time', '', post.date || ''));
-      a.appendChild(pic); a.appendChild(body); box.appendChild(a);
+  }
+  if (gate) {
+    var tabs = gate.querySelectorAll('.gate-tab');
+    var loginForm = document.getElementById('login-form');
+    var signupForm = document.getElementById('signup-form');
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var which = tab.getAttribute('data-tab');
+        tabs.forEach(function (x) {
+          var on = x === tab;
+          x.classList.toggle('on', on);
+          x.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        if (loginForm) loginForm.hidden = which !== 'login';
+        if (signupForm) signupForm.hidden = which !== 'signup';
+      });
     });
-    bindChips();
-  }).catch(function () { note('글을 불러오지 못했습니다.'); });
+    if (loginForm) loginForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var fd = new FormData(loginForm);
+      var phone = normPhone(fd.get('phone'));
+      var pw = String(fd.get('password') || '');
+      var msg = document.getElementById('login-msg');
+      var user = readUsers().filter(function (u) { return u.phone === phone && u.pw === hashPw(pw); })[0];
+      if (!user || phone.length < 10) {
+        if (msg) { msg.className = 'gate-msg'; msg.textContent = '휴대폰 또는 비밀번호를 확인해 주세요.'; }
+        return;
+      }
+      writeSession(user);
+      if (msg) { msg.className = 'gate-msg ok'; msg.textContent = '로그인되었습니다.'; }
+      refreshGate();
+    });
+    if (signupForm) signupForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var fd = new FormData(signupForm);
+      var phone = normPhone(fd.get('phone'));
+      var company = String(fd.get('company') || '').trim();
+      var name = String(fd.get('name') || '').trim();
+      var pw = String(fd.get('password') || '');
+      var blog = String(fd.get('blog') || '').trim().replace(/[^A-Za-z0-9_-]/g, '');
+      var msg = document.getElementById('signup-msg');
+      if (phone.length < 10 || !company || !name || pw.length < 4) {
+        if (msg) { msg.className = 'gate-msg'; msg.textContent = '업체명·담당자·휴대폰·비밀번호(4자 이상)를 입력해 주세요.'; }
+        return;
+      }
+      var list = readUsers();
+      if (list.some(function (u) { return u.phone === phone; })) {
+        if (msg) { msg.className = 'gate-msg'; msg.textContent = '이미 가입된 휴대폰 번호입니다. 로그인해 주세요.'; }
+        return;
+      }
+      var user = { phone: phone, company: company, name: name, blog: blog, pw: hashPw(pw), at: Date.now() };
+      list.push(user);
+      writeUsers(list);
+      writeSession(user);
+      if (msg) { msg.className = 'gate-msg ok'; msg.textContent = '가입이 완료되었습니다.'; }
+      refreshGate();
+    });
+  }
+  refreshGate();
+  }
+
+  // 글 보기 페이지도 회원만 열람
+  var frameEarly = document.getElementById('post-frame');
+  if (frameEarly && !isAuthed()) {
+    location.replace('community.html');
   }
 
   // 글 보기: 위에는 홈페이지 메뉴를 고정하고, 아래에 블로그 글, 오른쪽에 그 글을 쓴 업체의 버튼을 보여 줍니다.

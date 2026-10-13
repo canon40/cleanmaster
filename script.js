@@ -70,6 +70,28 @@
     });
   }
 
+  /* 모바일 서비스 메뉴: 1·2·3 가로 탭 */
+  var svcTabs = document.querySelectorAll(".svc-tab");
+  var svcCols = document.querySelectorAll(".svc-col");
+  if (svcTabs.length && svcCols.length) {
+    function activateSvcCol(col) {
+      svcTabs.forEach(function (tab) {
+        var on = tab.getAttribute("data-col") === col;
+        tab.classList.toggle("is-active", on);
+        tab.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      svcCols.forEach(function (panel) {
+        var on = panel.getAttribute("data-col") === col;
+        panel.classList.toggle("is-active", on);
+      });
+    }
+    svcTabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        activateSvcCol(tab.getAttribute("data-col"));
+      });
+    });
+  }
+
   var box = document.getElementById("posts");
   var chipBar = document.getElementById("blog-chips");
   if (!box || !chipBar) return;

@@ -61,34 +61,89 @@
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
       toggle.setAttribute("aria-label", open ? "메뉴 닫기" : "메뉴 열기");
     });
+    nav.querySelectorAll(".nav-item.has-sub > a").forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        if (!window.matchMedia("(max-width: 900px)").matches) return;
+        e.preventDefault();
+        var item = link.parentElement;
+        var willOpen = !item.classList.contains("open");
+        nav.querySelectorAll(".nav-item.open").forEach(function (el) {
+          if (el !== item) el.classList.remove("open");
+        });
+        item.classList.toggle("open", willOpen);
+      });
+    });
     nav.addEventListener("click", function (e) {
-      if (e.target.tagName === "A") {
-        nav.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
-        toggle.setAttribute("aria-label", "메뉴 열기");
+      var a = e.target.closest("a");
+      if (!a) return;
+      if (a.closest(".nav-item.has-sub") && a.parentElement && a.parentElement.classList.contains("has-sub") && a === a.parentElement.querySelector(":scope > a")) {
+        return;
       }
+      nav.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "메뉴 열기");
+      nav.querySelectorAll(".nav-item.open").forEach(function (el) {
+        el.classList.remove("open");
+      });
     });
   }
 
-  /* 모바일 서비스 메뉴: 1·2·3 가로 탭 */
+  /* 모바일 서비스 메뉴: 1·2·3 가로 탭 — 스크롤 이동 없이 패널만 교체 */
   var svcTabs = document.querySelectorAll(".svc-tab");
   var svcCols = document.querySelectorAll(".svc-col");
+  var svcMenu = document.querySelector(".svc-menu");
   if (svcTabs.length && svcCols.length) {
-    function activateSvcCol(col) {
+    var activeSvcCol = "01";
+
+    function isSvcTabMode() {
+      return window.matchMedia("(max-width: 900px)").matches;
+    }
+
+    function activateSvcCol(col, keepScroll) {
+      activeSvcCol = col || "01";
+      var tabMode = isSvcTabMode();
+      var lockY = keepScroll ? window.scrollY || window.pageYOffset : null;
+
       svcTabs.forEach(function (tab) {
-        var on = tab.getAttribute("data-col") === col;
+        var on = tab.getAttribute("data-col") === activeSvcCol;
         tab.classList.toggle("is-active", on);
         tab.setAttribute("aria-selected", on ? "true" : "false");
+        tab.setAttribute("tabindex", on ? "0" : "-1");
       });
+
       svcCols.forEach(function (panel) {
-        var on = panel.getAttribute("data-col") === col;
+        var on = panel.getAttribute("data-col") === activeSvcCol;
         panel.classList.toggle("is-active", on);
+        if (tabMode) {
+          if (on) panel.removeAttribute("hidden");
+          else panel.setAttribute("hidden", "");
+        } else {
+          panel.removeAttribute("hidden");
+        }
       });
+
+      if (svcMenu) {
+        svcMenu.classList.toggle("is-tab-mode", tabMode);
+      }
+
+      if (lockY !== null) {
+        requestAnimationFrame(function () {
+          window.scrollTo(0, lockY);
+        });
+      }
     }
+
     svcTabs.forEach(function (tab) {
-      tab.addEventListener("click", function () {
-        activateSvcCol(tab.getAttribute("data-col"));
+      tab.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        activateSvcCol(tab.getAttribute("data-col"), true);
       });
+    });
+
+    activateSvcCol(activeSvcCol, false);
+    window.addEventListener("resize", function () {
+      activateSvcCol(activeSvcCol, true);
     });
   }
 

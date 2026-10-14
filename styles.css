@@ -773,6 +773,51 @@ a.svc-item-row:hover .svc-ico {
 }
 .about-sign strong { color: var(--accent); }
 .about-cta { margin-top: 28px; }
+.about-profile {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  margin: 0 0 1.5em;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--card);
+}
+.about-profile th,
+.about-profile td {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.55;
+}
+.about-profile tr:last-child th,
+.about-profile tr:last-child td { border-bottom: 0; }
+.about-profile th {
+  width: 30%;
+  min-width: 108px;
+  background: color-mix(in srgb, var(--navy) 6%, var(--card));
+  color: var(--sub);
+  font-weight: 650;
+}
+.about-svc-list {
+  margin: 0 0 1.5em;
+  padding-left: 1.15em;
+  display: grid;
+  gap: 10px;
+  color: var(--sub);
+  font-size: 16px;
+  line-height: 1.7;
+}
+.about-svc-list strong { color: var(--navy); }
+@media (max-width: 640px) {
+  .about-profile th { width: 36%; }
+}
+@media print {
+  .site-header, .call-fab, .about-cta, .theme-toggle, .nav-toggle { display: none !important; }
+  .about-head { padding-top: 12px; }
+  body { background: #fff !important; }
+}
 .post-title {
   font-size: clamp(26px, 4vw, 36px);
   font-weight: 800;

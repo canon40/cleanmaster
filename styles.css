@@ -918,6 +918,8 @@ a.svc-item-row:hover .svc-ico {
   }
   .tel small { display: none; }
   .tel a { font-size: 15px; }
+  .btn-login { min-height: 32px; padding: 0 10px; font-size: 12px; }
+  .cat-jump { padding-bottom: 10px; gap: 6px; }
 
   .hero { padding: 36px 0 40px; }
   .hero-grid, .contact { grid-template-columns: 1fr; gap: 28px; }

@@ -819,7 +819,6 @@ a.svc-item-row:hover .svc-ico {
   .brand { font-size: 18px; }
   .brand-logo { width: 56px; height: 56px; }
   .brand small { font-size: 1em; margin: 0; }
-  .site-grid { grid-template-columns: 1fr 1fr; }
   .trust-grid { grid-template-columns: 1fr 1fr; }
   .nav {
     display: none;

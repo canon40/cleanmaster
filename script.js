@@ -306,7 +306,7 @@
     list.forEach(function (post) {
       var a = document.createElement("a");
       a.className = "work";
-      a.href = post.link || "https://blog.naver.com/jangsang40";
+      a.href = post.link || "https://blog.naver.com/twri101";
       if (/^https?:\/\//i.test(a.href)) {
         a.target = "_blank";
         a.rel = "noopener";
@@ -393,6 +393,6 @@
     })
     .catch(function () {
       box.innerHTML =
-        '<p class="muted">글을 불러오지 못했습니다. <a href="https://blog.naver.com/jangsang40" target="_blank" rel="noopener" style="color:var(--accent)">네이버 블로그</a>에서 확인해 주세요.</p>';
+        '<p class="muted">글을 불러오지 못했습니다. <a href="https://blog.naver.com/twri101" target="_blank" rel="noopener" style="color:var(--accent)">네이버 블로그</a>에서 확인해 주세요.</p>';
     });
 })();

@@ -1015,3 +1015,8 @@ a.svc-item-row:hover .svc-ico {
   html { scroll-behavior: auto; }
   * { transition: none !important; }
 }
+
+.svc-item-main{display:flex;align-items:center;gap:12px}
+.svc-thumb{width:64px;height:48px;object-fit:cover;border-radius:8px;border:1px solid var(--line);flex:none}
+.svc-item-text{flex:1;min-width:0}
+@media (max-width:900px){.svc-thumb{width:88px;height:66px;border-radius:10px}}

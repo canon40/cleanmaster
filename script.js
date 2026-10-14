@@ -1,5 +1,34 @@
 (function () {
-  document.querySelectorAll('.side-acc').forEach(function (acc) {
+  /* svc-menu: PC=가로 3열 클릭 펼침 / 휴대폰=첨부1 세로형 전체 표시 */
+  function syncSvcMenu() {
+    var wide = window.matchMedia("(min-width:901px)").matches;
+    document.querySelectorAll(".svc-menu").forEach(function (menu) {
+      var groups = menu.querySelectorAll(".svc-group");
+      if (!wide) {
+        groups.forEach(function (d) { d.open = true; });
+        return;
+      }
+      var current = menu.querySelector('.svc-group a[aria-current="page"]');
+      var currentGroup = current ? current.closest(".svc-group") : null;
+      groups.forEach(function (d, i) {
+        if (currentGroup) d.open = d === currentGroup;
+        else d.open = i === 0;
+      });
+    });
+  }
+  syncSvcMenu();
+  window.matchMedia("(min-width:901px)").addEventListener("change", syncSvcMenu);
+  document.querySelectorAll(".svc-menu").forEach(function (menu) {
+    menu.addEventListener("toggle", function (e) {
+      var wide = window.matchMedia("(min-width:901px)").matches;
+      var t = e.target;
+      if (!t.classList || !t.classList.contains("svc-group")) return;
+      if (!wide) { t.open = true; return; }
+      if (!t.open) return;
+      menu.querySelectorAll(".svc-group").forEach(function (d) { if (d !== t) d.open = false; });
+    }, true);
+  });
+document.querySelectorAll('.side-acc').forEach(function (acc) {
     acc.addEventListener('toggle', function (e) {
       var t = e.target;
       if (!t.classList || !t.classList.contains('side-group') || !t.open) return;
@@ -274,7 +303,7 @@
   var blogBody = document.getElementById('blog-body');
   if (!box && !gate) { bindChips(); }
   else if (box) {
-  var BLOG = 'https://blog.naver.com/jangsang40';
+  var BLOG = 'https://blog.naver.com/twri101';
   var blogLoaded = false;
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; }
   function note(msg) {
@@ -370,9 +399,16 @@
       paintFirms('');
 
       var visiblePosts = d.posts;
-      var counts = {}, order = [];
-      visiblePosts.forEach(function (p) { var c = p.cat || '소식'; if (!counts[c]) { counts[c] = 0; order.push(c); } counts[c]++; });
-      order.sort(function (x, y) { return counts[y] - counts[x]; });
+      /* 서비스 메뉴 순서로 카테고리 칩 정렬 */
+      var CAT_ORDER = [
+        '바닥 청소·코팅', '석재 연마·광택', '콘크리트 연마·폴리싱', '오염·접착제 제거', '계단·상판 복원',
+        '사무실·상업공간 청소', '카펫·의자 청소', '에어컨 분해 청소',
+        '외벽 청소', '화재 청소', '줄눈 시공', '소식'
+      ];
+      var counts = {};
+      visiblePosts.forEach(function (p) { var c = p.cat || '소식'; counts[c] = (counts[c] || 0) + 1; });
+      var order = CAT_ORDER.filter(function (c) { return counts[c]; });
+      Object.keys(counts).forEach(function (c) { if (order.indexOf(c) === -1) order.push(c); });
       var bar = document.getElementById('blog-chips');
       if (bar) {
         bar.innerHTML = '';
@@ -382,7 +418,7 @@
       box.innerHTML = '';
       visiblePosts.forEach(function (post) {
         var a = el('a', 'work');
-        a.href = /^\d{6,}$/.test(post.no || '') ? 'post.html?b=' + encodeURIComponent(post.blog || 'jangsang40') + '&no=' + post.no : BLOG;
+        a.href = /^\d{6,}$/.test(post.no || '') ? 'post.html?b=' + encodeURIComponent(post.blog || 'twri101') + '&no=' + post.no : BLOG;
         a.setAttribute('data-cat', post.cat || '소식');
         a.setAttribute('data-firm', post.member || '');
         var pic = el('div', 'work-img');

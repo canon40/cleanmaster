@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>대시보드 로그인 | FLOOR LAB</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#eef2f4">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="styles.css?v=20261014i">
+<style>
+  .dash-login {
+    min-height: calc(100vh - 120px);
+    display: grid;
+    place-items: center;
+    padding: 40px 16px 80px;
+  }
+  .dash-login-card {
+    width: min(420px, 100%);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 28px 24px;
+    box-shadow: var(--shadow);
+  }
+  .dash-login-card h1 {
+    margin: 6px 0 8px;
+    font-size: 26px;
+    letter-spacing: -0.02em;
+  }
+  .dash-login-card .eyebrow {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+  }
+  .dash-login-card label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 14px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .dash-login-card input {
+    min-height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0 12px;
+    font: inherit;
+    background: #fff;
+    color: var(--text);
+  }
+  .dash-login-card .btn.wide {
+    width: 100%;
+    margin-top: 18px;
+    justify-content: center;
+  }
+  .dash-login-card .error {
+    margin-top: 12px;
+  }
+  .dash-login-card .hint {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--sub);
+    line-height: 1.55;
+  }
+  .dash-login-card .links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .dash-login-card .links a {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#login-form">본문으로 건너뛰기</a>
+
+<header class="site-header" id="top">
+  <div class="wrap header-row">
+    <a class="brand" href="index.html" aria-label="FLOOR LAB 홈">
+      <img class="brand-logo" src="logo.png" width="72" height="72" alt="FLOOR LAB 로고">
+      <span>FLOOR LAB<small>관리자 대시보드</small></span>
+    </a>
+    <div class="header-side">
+      <a class="btn-login" href="index.html">공개 홈</a>
+    </div>
+  </div>
+</header>
+
+<main class="dash-login">
+  <form class="dash-login-card" id="login-form" autocomplete="on">
+    <p class="eyebrow">DASHBOARD LOGIN · ADMIN ONLY</p>
+    <h1>대시보드 로그인</h1>
+    <p class="muted" style="margin:0">트래픽·글쓰기·보증서·페이지 편집은 관리자만 사용할 수 있습니다.</p>
+
+    <label>
+      아이디
+      <input id="username" name="username" autocomplete="username" required value="admin">
+    </label>
+    <label>
+      비밀번호
+      <input id="password" name="password" type="password" autocomplete="current-password" required placeholder="비밀번호 입력">
+    </label>
+
+    <p class="error" id="error" hidden></p>
+    <button class="btn primary wide" type="submit" id="submit-btn">대시보드 로그인</button>
+
+    <p class="hint">
+      로컬 API(<code>8000</code>)와 관리자 앱(<code>5173</code>)이 켜져 있어야 합니다.
+      <code>start-all.bat</code> 또는 <code>start-admin.bat</code>을 먼저 실행하세요.
+    </p>
+    <div class="links">
+      <a href="http://127.0.0.1:5173/login">React 로그인 직접 열기</a>
+      <a href="http://127.0.0.1:8000/docs">API 문서</a>
+    </div>
+  </form>
+</main>
+
+<script>
+(function () {
+  var TOKEN_KEY = "fl_admin_token";
+  var API = "http://127.0.0.1:8000";
+  var DASH = "http://127.0.0.1:5173/admin";
+  var form = document.getElementById("login-form");
+  var err = document.getElementById("error");
+  var btn = document.getElementById("submit-btn");
+
+  function showError(msg) {
+    err.hidden = !msg;
+    err.textContent = msg || "";
+  }
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    showError("");
+    btn.disabled = true;
+    btn.textContent = "확인 중…";
+    var username = document.getElementById("username").value.trim();
+    var password = document.getElementById("password").value;
+    try {
+      var res = await fetch(API + "/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: username, password: password }),
+      });
+      var data = null;
+      try { data = await res.json(); } catch (_) {}
+      if (!res.ok) {
+        throw new Error((data && data.detail) || "아이디 또는 비밀번호가 올바르지 않습니다.");
+      }
+      if (!data || data.role !== "admin" || !data.access_token) {
+        throw new Error("관리자 계정만 로그인할 수 있습니다.");
+      }
+      try { localStorage.setItem(TOKEN_KEY, data.access_token); } catch (_) {}
+      window.location.href = DASH;
+    } catch (ex) {
+      var msg = ex && ex.message ? ex.message : "로그인에 실패했습니다.";
+      if (/Failed to fetch|NetworkError|fetch/i.test(String(msg))) {
+        msg = "API가 꺼져 있습니다. start-all.bat 실행 후 다시 시도하세요. (http://127.0.0.1:8000)";
+      }
+      showError(msg);
+      btn.disabled = false;
+      btn.textContent = "대시보드 로그인";
+    }
+  });
+})();
+</script>
+</body>
+</html>

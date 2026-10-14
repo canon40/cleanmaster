@@ -1,1 +1,12 @@
-{ "name": "cleanmaster-site", "version": "1.0.0", "private": true, "engines": { "node": ">=18" } }
+{
+  "name": "floor-lab-site",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "fetch-blog": "node scripts/fetch-blog.js",
+    "sync": "node scripts/fetch-blog.js"
+  }
+}

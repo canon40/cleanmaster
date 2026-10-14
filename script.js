@@ -137,11 +137,40 @@
       tab.addEventListener("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
-        activateSvcCol(tab.getAttribute("data-col"), true);
+        var col = tab.getAttribute("data-col");
+        activateSvcCol(col, true);
+        try {
+          history.replaceState(null, "", "#services-" + col);
+        } catch (err) {}
       });
     });
 
-    activateSvcCol(activeSvcCol, false);
+    function applySvcHash(scrollTo) {
+      var h = (location.hash || "").replace(/^#/, "");
+      var m = h.match(/^services-0?([123])$/);
+      if (m) {
+        activateSvcCol("0" + m[1], !scrollTo);
+        if (scrollTo) {
+          var target = document.getElementById("services");
+          if (target && target.scrollIntoView) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }
+        return true;
+      }
+      if (h === "services") {
+        activateSvcCol(activeSvcCol || "01", !scrollTo);
+        return false;
+      }
+      return false;
+    }
+
+    if (!applySvcHash(true)) {
+      activateSvcCol(activeSvcCol, false);
+    }
+    window.addEventListener("hashchange", function () {
+      applySvcHash(true);
+    });
     window.addEventListener("resize", function () {
       activateSvcCol(activeSvcCol, true);
     });
